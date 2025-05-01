@@ -1,4 +1,5 @@
 # 全局配置部分
+mixed-port: 21080
 mode: rule
 allow-lan: true
 bind-address: '*' 
@@ -8,7 +9,7 @@ log-level: warning  # 增加日志级别便于调试
 profile:
   tracing: false  # 禁用跟踪以提高性能
   store-selected: true  # 记住选择的代理
-  store-fake-ip: false  # 记住fake-ip映射
+  store-fake-ip: true  # 记住fake-ip映射
 
 
 external-controller: 0.0.0.0:9090
@@ -36,6 +37,9 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16  # 指定fake-ip范围
   nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 117.50.10.10
     - 114.114.114.114
     - https://dns.alidns.com/dns-query
     - https://doh.360.cn/dns-query
@@ -277,53 +281,53 @@ rule-providers:
 
 # 规则配置部分 - 针对透明代理优化
 rules:
- #  # 广告拦截
- #  - RULE-SET,reject,REJECT,no-resolve
- #  # - RULE-SET,adhosts,REJECT
- #  - RULE-SET,user-reject,REJECT,no-resolve
+  # 广告拦截
+  - RULE-SET,reject,REJECT,no-resolve
+  # - RULE-SET,adhosts,REJECT
+  - RULE-SET,user-reject,REJECT,no-resolve
 
- #  # 本地网络和特殊应用直连
- #  - IP-CIDR,10.0.0.0/8,DIRECT
- #  - IP-CIDR,172.16.0.0/12,DIRECT
- #  - IP-CIDR,100.64.0.0/10,DIRECT
- #  - IP-CIDR,192.168.0.0/16,DIRECT
- #  - IP-CIDR,127.0.0.0/8,DIRECT
- #  - RULE-SET,applications,DIRECT
- #  - DOMAIN,clash.razord.top,DIRECT
- #  - DOMAIN,yacd.haishan.me,DIRECT
- #  - RULE-SET,private,DIRECT
- #  - PROCESS-NAME,tap_speed.exe,DIRECT
- #  - PROCESS-NAME,trojan.exe,DIRECT
+  # 本地网络和特殊应用直连
+  - IP-CIDR,10.0.0.0/8,DIRECT
+  - IP-CIDR,172.16.0.0/12,DIRECT
+  - IP-CIDR,100.64.0.0/10,DIRECT
+  - IP-CIDR,192.168.0.0/16,DIRECT
+  - IP-CIDR,127.0.0.0/8,DIRECT
+  - RULE-SET,applications,DIRECT
+  - DOMAIN,clash.razord.top,DIRECT
+  - DOMAIN,yacd.haishan.me,DIRECT
+  - RULE-SET,private,DIRECT
+  - PROCESS-NAME,tap_speed.exe,DIRECT
+  - PROCESS-NAME,trojan.exe,DIRECT
 
 
- #  # 苹果服务直连
- #  - RULE-SET,icloud,DIRECT
- #  - RULE-SET,apple,DIRECT
+  # 苹果服务直连
+  - RULE-SET,icloud,DIRECT
+  - RULE-SET,apple,DIRECT
   
- #  # 国内流量直连
- #  - RULE-SET,direct,DIRECT
- #  - RULE-SET,lancidr,DIRECT
- #  - RULE-SET,cncidr,DIRECT
- #  - GEOIP,LAN,DIRECT
- #  - GEOIP,CN,DIRECT
+  # 国内流量直连
+  - RULE-SET,direct,DIRECT
+  - RULE-SET,lancidr,DIRECT
+  - RULE-SET,cncidr,DIRECT
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,DIRECT
 
- #  # 特殊处理
- # #*
- #  # 代理规则
- #  #- RULE-SET,google,自动选择
- #  #- RULE-SET,proxy,自动选择
- #  #- RULE-SET,telegramcidr,自动选择
- #  #- RULE-SET,gfw,自动选择
- #  #- RULE-SET,tld-not-cn,自动选择
+  # 特殊处理
+ #*
+  # 代理规则
+  #- RULE-SET,google,自动选择
+  #- RULE-SET,proxy,自动选择
+  #- RULE-SET,telegramcidr,自动选择
+  #- RULE-SET,gfw,自动选择
+  #- RULE-SET,tld-not-cn,自动选择
   
   
- #    # 代理规则
+    # 代理规则
     
- #  - RULE-SET,google,节点选择
- #  - RULE-SET,proxy,节点选择
- #  - RULE-SET,telegramcidr,节点选择
- #  - RULE-SET,gfw,节点选择
- #  - RULE-SET,tld-not-cn,节点选择
+  - RULE-SET,google,节点选择
+  - RULE-SET,proxy,节点选择
+  - RULE-SET,telegramcidr,节点选择
+  - RULE-SET,gfw,节点选择
+  - RULE-SET,tld-not-cn,节点选择
   
   # 最终规则
   - MATCH,节点选择
