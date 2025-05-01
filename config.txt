@@ -1,0 +1,333 @@
+# 全局配置部分
+mixed-port: 21080
+mode: rule
+allow-lan: true
+bind-address: '*' 
+ipv6: false
+log-level: warning  # 增加日志级别便于调试
+# 在全局配置中添加
+profile:
+  tracing: false  # 禁用跟踪以提高性能
+  store-selected: true  # 记住选择的代理
+  store-fake-ip: true  # 记住fake-ip映射
+
+
+external-controller: 0.0.0.0:9090
+external-ui: ./dashboard
+tproxy-port: 9898
+redir-port: 9797
+
+
+# 隧道配置部分（tun） - 针对透明代理优化
+tun:
+  enable: false
+  stack: system
+  dns-hijack:
+    - any:53
+  auto-route: true
+  auto-detect-interface: true
+  mtu: 1500  # 增加MTU值
+  strict-route: true  # 启用严格路由模式
+
+# DNS 配置部分 - 优化DNS解析
+dns:
+  enable: true
+  ipv6: false
+  listen: 0.0.0.0:53
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16  # 指定fake-ip范围
+  nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 117.50.10.10
+    - 114.114.114.114
+    - https://dns.alidns.com/dns-query
+    - https://doh.360.cn/dns-query
+
+  fallback:
+    - tls://dns.rubyfish.cn:853
+    - tls://1.0.0.1:853
+    - https://dns.rubyfish.cn/dns-query
+    - https://cloudflare-dns.com/dns-query  
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+  domain:
+      - "+.google.com"
+      - "+.facebook.com"
+      - "+.youtube.com"
+      
+  # 添加缓存设置
+  cache-enable: true
+  cache-size: 1024  # 1MB缓存
+
+# 代理服务器配置部分（proxies）保持不变
+# 代理服务器配置部分（proxies）
+proxies:
+  - {name: "trojan1", server: "36.156.102.123", port: 28296, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan2", server: "36.156.102.121", port: 19220, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan3", server: "36.151.251.62", port: 7129, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan4", server: "36.156.102.115", port: 39689, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan5", server: "36.151.251.62", port: 51420, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan6", server: "36.151.251.59", port: 36587, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan7", server: "36.151.251.60", port: 3754, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan8", server: "36.156.102.118", port: 17740, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan9", server: "36.156.102.118", port: 11796, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan10", server: "36.156.102.118", port: 34041, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan11", server: "36.151.251.57", port: 45334, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan12", server: "36.151.251.62", port: 23103, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan13", server: "36.156.102.121", port: 50757, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan14", server: "36.151.251.59", port: 52343, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan15", server: "36.156.102.121", port: 40252, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan16", server: "36.151.251.59", port: 11641, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan17", server: "36.151.251.61", port: 36654, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan18", server: "36.151.251.59", port: 47655, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan19", server: "36.151.251.59", port: 28910, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan20", server: "36.151.251.61", port: 8565, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan21", server: "36.151.251.62", port: 29769, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan22", server: "36.151.251.61", port: 3744, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan23", server: "36.151.251.61", port: 48069, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan24", server: "36.151.251.61", port: 8513, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan25", server: "36.156.102.124", port: 46861, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan26", server: "36.151.251.61", port: 50846, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {name: "trojan27", server: "36.151.251.62", port: 23103, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+
+# 代理组配置部分（proxy-groups）
+proxy-groups:
+  - name: "节点选择"
+    type: select
+    proxies:
+      - trojan1
+      - trojan2
+      - trojan3
+      - trojan4
+      - trojan5
+      - trojan6
+      - trojan7
+      - trojan8
+      - trojan9
+      - trojan10
+      - trojan11
+      - trojan12
+      - trojan13
+      - trojan14
+      - trojan15
+      - trojan16
+      - trojan17
+      - trojan18
+      - trojan19
+      - trojan20
+      - trojan21
+      - trojan22
+      - trojan23
+      - trojan24
+      - trojan25
+      - trojan26
+      - trojan27
+  - name: "直连"
+    type: select
+    proxies:
+      - DIRECT
+  - name: "自动选择"
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    proxies:
+      - trojan1
+      - trojan2
+      - trojan3
+      - trojan4
+      - trojan5
+      - trojan6
+      - trojan7
+      - trojan8
+      - trojan9
+      - trojan10
+      - trojan11
+      - trojan12
+      - trojan13
+      - trojan14
+      - trojan15
+      - trojan16
+      - trojan17
+      - trojan18
+      - trojan19
+      - trojan20
+      - trojan21
+      - trojan22
+      - trojan23
+      - trojan24
+      - trojan25
+      - trojan26
+      - trojan27
+    
+
+
+# 脚本配置部分
+script:
+  shortcuts:
+    quic: network == 'udp' and dst_port == 443
+    otherudp: "network == 'udp' and dst_port != 443"
+
+
+# 规则提供者部分保持不变
+rule-providers:
+  reject:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+    path: ./ruleset/reject.yaml
+    interval: 86400
+
+  icloud:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt"
+    path: ./ruleset/icloud.yaml
+    interval: 86400
+
+  apple:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
+    path: ./ruleset/apple.yaml
+    interval: 86400
+
+  google:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt"
+    path: ./ruleset/google.yaml
+    interval: 86400
+
+  proxy:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
+    path: ./ruleset/proxy.yaml
+    interval: 86400
+
+  direct:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
+    path: ./ruleset/direct.yaml
+    interval: 86400
+
+  private:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt"
+    path: ./ruleset/private.yaml
+    interval: 86400
+
+  gfw:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./ruleset/gfw.yaml
+    interval: 86400
+
+  tld-not-cn:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
+    path: ./ruleset/tld-not-cn.yaml
+    interval: 86400
+
+  telegramcidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
+    path: ./ruleset/telegramcidr.yaml
+    interval: 86400
+
+  cncidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
+    path: ./ruleset/cncidr.yaml
+    interval: 86400
+
+  lancidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
+    path: ./ruleset/lancidr.yaml
+    interval: 86400
+
+  applications:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
+    path: ./ruleset/applications.yaml
+    interval: 86400
+
+  adhosts:
+    type: http
+    behavior: domain
+    url: "https://raw.chenchen.one/adhosts/refs/heads/master/adhosts.yaml?token=ikun6666"
+    path: ./ruleset/adhosts.yaml
+    interval: 86400
+
+  user-reject:
+    type: file
+    behavior: ipcidr
+    url: ""
+    path: ./ruleset/userReject.yaml
+    interval: 86400
+
+# 规则配置部分 - 针对透明代理优化
+rules:
+  # 广告拦截
+  - RULE-SET,reject,REJECT,no-resolve
+  # - RULE-SET,adhosts,REJECT
+  - RULE-SET,user-reject,REJECT,no-resolve
+
+  # 本地网络和特殊应用直连
+  - IP-CIDR,10.0.0.0/8,DIRECT
+  - IP-CIDR,172.16.0.0/12,DIRECT
+  - IP-CIDR,100.64.0.0/10,DIRECT
+  - IP-CIDR,192.168.0.0/16,DIRECT
+  - IP-CIDR,127.0.0.0/8,DIRECT
+  - RULE-SET,applications,DIRECT
+  - DOMAIN,clash.razord.top,DIRECT
+  - DOMAIN,yacd.haishan.me,DIRECT
+  - RULE-SET,private,DIRECT
+  - PROCESS-NAME,tap_speed.exe,DIRECT
+  - PROCESS-NAME,trojan.exe,DIRECT
+
+
+  # 苹果服务直连
+  - RULE-SET,icloud,DIRECT
+  - RULE-SET,apple,DIRECT
+  
+  # 国内流量直连
+  - RULE-SET,direct,DIRECT
+  - RULE-SET,lancidr,DIRECT
+  - RULE-SET,cncidr,DIRECT
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,DIRECT
+
+  # 特殊处理
+ #*
+  # 代理规则
+  #- RULE-SET,google,自动选择
+  #- RULE-SET,proxy,自动选择
+  #- RULE-SET,telegramcidr,自动选择
+  #- RULE-SET,gfw,自动选择
+  #- RULE-SET,tld-not-cn,自动选择
+  
+  
+    # 代理规则
+    
+  - RULE-SET,google,节点选择
+  - RULE-SET,proxy,节点选择
+  - RULE-SET,telegramcidr,节点选择
+  - RULE-SET,gfw,节点选择
+  - RULE-SET,tld-not-cn,节点选择
+  
+  # 最终规则
+  - MATCH,节点选择
