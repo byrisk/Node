@@ -227,7 +227,6 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
-       proxies:
       - 节点1
       - 节点2
       - 节点3
