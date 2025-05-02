@@ -66,39 +66,131 @@ dns:
 # 代理服务器配置部分（proxies）保持不变
 # 代理服务器配置部分（proxies）
 proxies:
-  - {name: "trojan1", server: "36.156.102.123", port: 28296, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan2", server: "36.156.102.121", port: 19220, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan3", server: "36.151.251.62", port: 7129, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan4", server: "36.156.102.115", port: 39689, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan5", server: "36.151.251.62", port: 51420, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan6", server: "36.151.251.59", port: 36587, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan7", server: "36.151.251.60", port: 3754, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan8", server: "36.156.102.118", port: 17740, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan9", server: "36.156.102.118", port: 11796, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan10", server: "36.156.102.118", port: 34041, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan11", server: "36.151.251.57", port: 45334, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan12", server: "36.151.251.62", port: 23103, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan13", server: "36.156.102.121", port: 50757, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan14", server: "36.151.251.59", port: 52343, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan15", server: "36.156.102.121", port: 40252, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan16", server: "36.151.251.59", port: 11641, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan17", server: "36.151.251.61", port: 36654, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan18", server: "36.151.251.59", port: 47655, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan19", server: "36.151.251.59", port: 28910, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan20", server: "36.151.251.61", port: 8565, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan21", server: "36.151.251.62", port: 29769, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan22", server: "36.151.251.61", port: 3744, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan23", server: "36.151.251.61", port: 48069, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan24", server: "36.151.251.61", port: 8513, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan25", server: "36.156.102.124", port: 46861, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan26", server: "36.151.251.61", port: 50846, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
-  - {name: "trojan27", server: "36.151.251.62", port: 23103, type: "trojan", password: "RlzoEILU", sni: "www.baidu.com", skip-cert-verify: true, udp: true, alpn: ["h2", "http/1.1"]}
+  - {"name": "节点1", "server": "36.151.251.60", "port": 3754, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点2", "server": "36.151.251.61", "port": 54167, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点3", "server": "36.156.102.124", "port": 5800, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点4", "server": "36.151.251.61", "port": 11713, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点5", "server": "36.151.251.59", "port": 4092, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点6", "server": "36.151.251.62", "port": 29930, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点7", "server": "36.151.251.62", "port": 23103, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点8", "server": "36.151.251.57", "port": 41067, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点9", "server": "36.151.251.61", "port": 41081, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点10", "server": "36.151.251.59", "port": 3597, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点11", "server": "36.151.251.59", "port": 42163, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点12", "server": "36.151.251.59", "port": 11641, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点13", "server": "36.151.251.61", "port": 36654, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点14", "server": "36.151.251.62", "port": 28548, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点15", "server": "36.151.251.59", "port": 47655, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点16", "server": "36.151.251.59", "port": 44907, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点17", "server": "36.151.251.61", "port": 15407, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点18", "server": "36.151.251.61", "port": 33097, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点19", "server": "36.151.251.61", "port": 3744, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点20", "server": "36.151.251.61", "port": 48069, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点21", "server": "36.151.251.61", "port": 8513, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点22", "server": "36.156.102.121", "port": 30656, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点23", "server": "36.151.251.57", "port": 45334, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点24", "server": "36.151.251.57", "port": 25253, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点25", "server": "36.151.251.59", "port": 55860, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点26", "server": "223.111.144.13", "port": 16322, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点27", "server": "36.156.102.124", "port": 46861, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点28", "server": "36.151.251.61", "port": 50846, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点29", "server": "36.151.251.57", "port": 42003, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点30", "server": "36.151.251.59", "port": 36587, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点31", "server": "36.151.251.59", "port": 11796, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点32", "server": "36.156.102.121", "port": 19220, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点33", "server": "36.156.102.115", "port": 48959, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点34", "server": "36.151.251.61", "port": 17587, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点35", "server": "36.151.251.62", "port": 54980, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点36", "server": "36.151.251.61", "port": 23873, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点37", "server": "36.151.251.59", "port": 52343, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点38", "server": "36.156.102.121", "port": 40252, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点39", "server": "36.151.251.61", "port": 7789, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点40", "server": "36.151.251.62", "port": 29769, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点41", "server": "36.151.251.61", "port": 8565, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点42", "server": "36.156.102.118", "port": 17740, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点43", "server": "36.156.102.121", "port": 50757, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点44", "server": "36.156.102.123", "port": 28296, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点45", "server": "36.151.251.59", "port": 28910, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "节点46", "server": "36.151.251.61", "port": 16641, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan1", "server": "36.156.102.123", "port": 28296, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan2", "server": "36.156.102.121", "port": 19220, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan3", "server": "36.151.251.62", "port": 7129, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan4", "server": "36.156.102.115", "port": 39689, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan5", "server": "36.151.251.62", "port": 51420, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan6", "server": "36.151.251.59", "port": 36587, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan7", "server": "36.151.251.60", "port": 3754, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan8", "server": "36.156.102.118", "port": 17740, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan9", "server": "36.156.102.118", "port": 11796, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan10", "server": "36.156.102.118", "port": 34041, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan11", "server": "36.151.251.57", "port": 45334, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan12", "server": "36.151.251.62", "port": 23103, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan13", "server": "36.156.102.121", "port": 50757, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan14", "server": "36.151.251.59", "port": 52343, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan15", "server": "36.156.102.121", "port": 40252, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan16", "server": "36.151.251.59", "port": 11641, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan17", "server": "36.151.251.61", "port": 36654, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan18", "server": "36.151.251.59", "port": 47655, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan19", "server": "36.151.251.59", "port": 28910, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan20", "server": "36.151.251.61", "port": 8565, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan21", "server": "36.151.251.62", "port": 29769, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan22", "server": "36.151.251.61", "port": 3744, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan23", "server": "36.151.251.61", "port": 48069, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan24", "server": "36.151.251.61", "port": 8513, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan25", "server": "36.156.102.124", "port": 46861, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan26", "server": "36.151.251.61", "port": 50846, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
+  - {"name": "trojan27", "server": "36.151.251.62", "port": 23103, "type": "trojan", "password": "RlzoEILU", "sni": "www.baidu.com", "skip-cert-verify": True, "udp": True, "alpn": ["h2", "http/1.1"]}
 
 # 代理组配置部分（proxy-groups）
 proxy-groups:
   - name: "节点选择"
     type: select
     proxies:
+      - 节点1
+      - 节点2
+      - 节点3
+      - 节点4
+      - 节点5
+      - 节点6
+      - 节点7
+      - 节点8
+      - 节点9
+      - 节点10
+      - 节点11
+      - 节点12
+      - 节点13
+      - 节点14
+      - 节点15
+      - 节点16
+      - 节点17
+      - 节点18
+      - 节点19
+      - 节点20
+      - 节点21
+      - 节点22
+      - 节点23
+      - 节点24
+      - 节点25
+      - 节点26
+      - 节点27
+      - 节点28
+      - 节点29
+      - 节点30
+      - 节点31
+      - 节点32
+      - 节点33
+      - 节点34
+      - 节点35
+      - 节点36
+      - 节点37
+      - 节点38
+      - 节点39
+      - 节点40
+      - 节点41
+      - 节点42
+      - 节点43
+      - 节点44
+      - 节点45
+      - 节点46
       - trojan1
       - trojan2
       - trojan3
@@ -135,6 +227,53 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
+       proxies:
+      - 节点1
+      - 节点2
+      - 节点3
+      - 节点4
+      - 节点5
+      - 节点6
+      - 节点7
+      - 节点8
+      - 节点9
+      - 节点10
+      - 节点11
+      - 节点12
+      - 节点13
+      - 节点14
+      - 节点15
+      - 节点16
+      - 节点17
+      - 节点18
+      - 节点19
+      - 节点20
+      - 节点21
+      - 节点22
+      - 节点23
+      - 节点24
+      - 节点25
+      - 节点26
+      - 节点27
+      - 节点28
+      - 节点29
+      - 节点30
+      - 节点31
+      - 节点32
+      - 节点33
+      - 节点34
+      - 节点35
+      - 节点36
+      - 节点37
+      - 节点38
+      - 节点39
+      - 节点40
+      - 节点41
+      - 节点42
+      - 节点43
+      - 节点44
+      - 节点45
+      - 节点46
       - trojan1
       - trojan2
       - trojan3
