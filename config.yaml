@@ -24,7 +24,6 @@ dns:
   - 119.29.29.29
   - 223.5.5.5
   - 223.6.6.6
-
   fallback:
     - tls://1.1.1.1:853
     - tls://8.8.8.8:853
@@ -74,7 +73,6 @@ proxy-providers:  # Meta支持机场通用订阅
     <<: *p
     url: "https://gist.githubusercontent.com/byrisk/172280d15a99a420c2ec0d190be8e40a/raw/515ae2eddd954116eee7330af025e617b084a7fa/all.yaml"
 
-      
   订阅 3: # 备用节点
     <<: *p
     url: "https://sub.amaoa.xyz/storage?filename=all.yaml&token=sub_ruruo"
@@ -88,13 +86,13 @@ proxy-groups:
 
 # 功能分组
 
-# 自动选择(推荐)
-  - name: 🚀 自动选择(推荐)
+# 自动选择(推荐_自用高速)
+  - name: 🚀 自动选择(推荐_自用高速)
     <<: *fly
     filter: "(?i)^(?!unavailable).*$"
   
 # 节点选择(自用高速)
-  - name: 🚀节点选择(自用高速)
+  - name: 🚀节点选择(推荐_自用高速)
     proxies:
       - "DIRECT"
     <<: *all
@@ -134,7 +132,7 @@ proxy-groups:
     type: select
     proxies:
       - 🌏️ 节点选择（ All ）
-      - 🚀节点选择(自用高速)
+      - 🚀节点选择(推荐_自用高速)
       - DIRECT
 
 # 规则
@@ -152,9 +150,6 @@ rules:
   - DOMAIN,claude.ai,🔀 AI 服务
   - DOMAIN,groq.com,🔀 AI 服务
   - DOMAIN-SUFFIX,console.anthropic.com,🔀 AI 服务
-  - DOMAIN,anthropic.com,🔀 AI 服务
-  - DOMAIN,claude.ai,🔀 AI 服务
-  - DOMAIN,console.anthropic.com,🔀 AI 服务
   - DOMAIN,anthropic.com,🔀 AI 服务
   - DOMAIN-SUFFIX,aistudio.google.com,🔀 AI 服务
   - DOMAIN,browser-intake-datadoghq.com,🔀 AI 服务
@@ -186,8 +181,8 @@ rules:
 
 # 服务类
   - RULE-SET,TikTok,🔀 AI 服务
-  - RULE-SET,PayPal,🌏️ 节点选择（ All ）,🚀节点选择(自用高速)
-  - RULE-SET,telegramcidr,🌏️ 节点选择（ All ）,🚀节点选择(自用高速)
+  - RULE-SET,PayPal,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
+  - RULE-SET,telegramcidr,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
   - DOMAIN-KEYWORD,oaifree,DIRECT
   - DOMAIN-SUFFIX,shared.oaifree.com,DIRECT
 
@@ -200,11 +195,11 @@ rules:
   - RULE-SET,BanEasyList,⛔️ 拦截广告
 
 # 补丁规则
-  - RULE-SET,gfw,🌏️ 节点选择（ All ）,🚀节点选择(自用高速)
-  - RULE-SET,proxy,🌏️ 节点选择（ All ）,🚀节点选择(自用高速)
-  - RULE-SET,tld-not-cn,🌏️ 节点选择（ All ）,🚀节点选择(自用高速)
-  - RULE-SET,ProxyGFWlist,🌏️ 节点选择（ All ）,🚀节点选择(自用高速)
-  - RULE-SET,ProxyClient,🌏️ 节点选择（ All ）,🚀节点选择(自用高速)
+  - RULE-SET,gfw,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
+  - RULE-SET,proxy,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
+  - RULE-SET,tld-not-cn,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
+  - RULE-SET,ProxyGFWlist,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
+  - RULE-SET,ProxyClient,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
   - RULE-SET,ChinaDomain,DIRECT,no-resolve
   - RULE-SET,ChinaCompanyIp,DIRECT,no-resolve
   - RULE-SET,cncidr,DIRECT,no-resolve
@@ -215,7 +210,7 @@ rules:
 # 默认规则 
   - GEOIP,CN,DIRECT,no-resolve
   - GEOSITE,geolocation-cn,DIRECT
-  - GEOSITE,geolocation-!cn,🌏️ 节点选择（ All ）,🚀节点选择(自用高速)
+  - GEOSITE,geolocation-!cn,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
   - MATCH,↪️ 漏网之鱼
 
 rule-providers:
@@ -315,7 +310,7 @@ rule-providers:
     type: http
     behavior: domain
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
-    path: ./ruleset/BanEasyList.yaml
+    path: ./ruleset/ProxyGFWlist.yaml
     interval: 86400
 
   ProxyClient: 
@@ -447,4 +442,4 @@ rule-providers:
     format: yaml
     path: ./rules/Steam.yaml
     url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Steam.yaml"
-    interval: 86400
+    interval: 86400    
