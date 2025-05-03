@@ -1,83 +1,83 @@
-name: Sync Gist to Repo
+# name: Sync Gist to Repo
 
-on:
-  # 这里设置了两个触发条件，你可以根据需求调整
-  # 例如，push事件表示每次推送到仓库时都会触发同步
-  # schedule表示按照指定的时间计划触发同步，这里是每天凌晨2点
-  push:
-  schedule:
-    - cron: '0 2 * * *'
+# on:
+#   # 这里设置了两个触发条件，你可以根据需求调整
+#   # 例如，push事件表示每次推送到仓库时都会触发同步
+#   # schedule表示按照指定的时间计划触发同步，这里是每天凌晨2点
+#   push:
+#   schedule:
+#     - cron: '0 2 * * *'
 
-jobs:
-  sync:
-    runs-on: ubuntu - latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+# jobs:
+#   sync:
+#     runs-on: ubuntu - latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup - python@v2
-        with:
-          python - version: 3.9  # 你可以根据脚本实际使用的Python版本调整
+#       - name: Set up Python
+#         uses: actions/setup - python@v2
+#         with:
+#           python - version: 3.9  # 你可以根据脚本实际使用的Python版本调整
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests
+#       - name: Install dependencies
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install requests
 
-      - name: Sync Gist to Repo
-        env:
-          GITHUB_TOKEN: ${{ secrets.XiaoQing }}
-          USERNAME: brisk  # 替换为你的GitHub用户名
-          REPO_NAME: Node  # 替换为你的仓库名称
-          FILE_PATH: config.yaml  # 替换为仓库中文件的路径
-          GIST_ID: 172280d15a99a420c2ec0d190be8e40a  # 替换为要同步的Gist ID
-          GIST_FILE_NAME: all.yaml  # 替换为Gist中的文件名
-        run: |
-          python <<EOF
-import requests
+#       - name: Sync Gist to Repo
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.XiaoQing }}
+#           USERNAME: brisk  # 替换为你的GitHub用户名
+#           REPO_NAME: Node  # 替换为你的仓库名称
+#           FILE_PATH: config.yaml  # 替换为仓库中文件的路径
+#           GIST_ID: 172280d15a99a420c2ec0d190be8e40a  # 替换为要同步的Gist ID
+#           GIST_FILE_NAME: all.yaml  # 替换为Gist中的文件名
+#         run: |
+#           python <<EOF
+# import requests
 
-github_token = "${{ env.GITHUB_TOKEN }}"
-username = "${{ env.USERNAME }}"
-repo_name = "${{ env.REPO_NAME }}"
-file_path = "${{ env.FILE_PATH }}"
-gist_id = "${{ env.GIST_ID }}"
-gist_file_name = "${{ env.GIST_FILE_NAME }}"
+# github_token = "${{ env.GITHUB_TOKEN }}"
+# username = "${{ env.USERNAME }}"
+# repo_name = "${{ env.REPO_NAME }}"
+# file_path = "${{ env.FILE_PATH }}"
+# gist_id = "${{ env.GIST_ID }}"
+# gist_file_name = "${{ env.GIST_FILE_NAME }}"
 
-headers = {
-    "Authorization": f"token {github_token}",
-    "Accept": "application/vnd.github.v3+json"
-}
+# headers = {
+#     "Authorization": f"token {github_token}",
+#     "Accept": "application/vnd.github.v3+json"
+# }
 
-# 获取Gist文件内容
-gist_url = f"https://api.github.com/gists/{gist_id}"
-gist_response = requests.get(gist_url, headers=headers)
-if gist_response.status_code == 200:
-    gist_info = gist_response.json()
-    gist_file_content = gist_info["files"][gist_file_name]["content"]
-else:
-    print(f"Failed to get Gist file content: {gist_response.text}")
-    exit(1)
+# # 获取Gist文件内容
+# gist_url = f"https://api.github.com/gists/{gist_id}"
+# gist_response = requests.get(gist_url, headers=headers)
+# if gist_response.status_code == 200:
+#     gist_info = gist_response.json()
+#     gist_file_content = gist_info["files"][gist_file_name]["content"]
+# else:
+#     print(f"Failed to get Gist file content: {gist_response.text}")
+#     exit(1)
 
-# 获取仓库文件的当前SHA值
-get_url = f"https://api.github.com/repos/{username}/{repo_name}/contents/{file_path}"
-get_response = requests.get(get_url, headers=headers)
-if get_response.status_code == 200:
-    file_info = get_response.json()
-    sha = file_info.get("sha")
-    # 准备更新文件的请求数据
-    data = {
-        "message": "Sync from Gist",
-        "content": gist_file_content.encode().hex(),
-        "sha": sha
-    }
-    # 发送PUT请求来更新文件
-    put_url = f"https://api.github.com/repos/{username}/{repo_name}/contents/{file_path}"
-    put_response = requests.put(put_url, headers=headers, json=data)
-    if put_response.status_code == 200:
-        print("File updated successfully!")
-    else:
-        print(f"Failed to update file: {put_response.text}")
-else:
-    print(f"Failed to get file info: {get_response.text}")
-EOF
+# # 获取仓库文件的当前SHA值
+# get_url = f"https://api.github.com/repos/{username}/{repo_name}/contents/{file_path}"
+# get_response = requests.get(get_url, headers=headers)
+# if get_response.status_code == 200:
+#     file_info = get_response.json()
+#     sha = file_info.get("sha")
+#     # 准备更新文件的请求数据
+#     data = {
+#         "message": "Sync from Gist",
+#         "content": gist_file_content.encode().hex(),
+#         "sha": sha
+#     }
+#     # 发送PUT请求来更新文件
+#     put_url = f"https://api.github.com/repos/{username}/{repo_name}/contents/{file_path}"
+#     put_response = requests.put(put_url, headers=headers, json=data)
+#     if put_response.status_code == 200:
+#         print("File updated successfully!")
+#     else:
+#         print(f"Failed to update file: {put_response.text}")
+# else:
+#     print(f"Failed to get file info: {get_response.text}")
+# EOF
