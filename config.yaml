@@ -75,7 +75,7 @@ proxy-providers:  # Meta支持机场通用订阅
 
   订阅 3: # 备用节点
     <<: *p
-    url: "http://linuxdo.862368.xyz/proxy.php"
+    url: "https://e6bgteon34.yjbpi.cn/ND-D7/E55oa/ch"
 
   # 订阅 4: # 备用节点
   #   <<: *p
