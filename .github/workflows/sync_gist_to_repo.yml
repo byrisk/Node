@@ -30,7 +30,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: brisk  # 替换为你的GitHub用户名
           REPO_NAME: Node  # 替换为你的仓库名称
-          FILE_PATH: https://github.com/byrisk/Node/blob/main/config.yaml  # 替换为仓库中文件的路径
+          FILE_PATH: config.yaml  # 替换为仓库中文件的路径
           GIST_ID: 172280d15a99a420c2ec0d190be8e40a  # 替换为要同步的Gist ID
           GIST_FILE_NAME: all.yaml  # 替换为Gist中的文件名
         run: |
