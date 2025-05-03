@@ -1,733 +1,430 @@
-proxies:
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1F0\U0001F1F7韩国1 | ⬇️ 1.3MB/s"
-    password: RlzoEILU
-    port: 28910
-    server: 36.151.251.59
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1ED\U0001F1F0香港1 | ⬇️ 5.9MB/s"
-    password: RlzoEILU
-    port: 45334
-    server: 36.151.251.57
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1F0\U0001F1F7韩国2 | ⬇️ 2.2MB/s"
-    password: RlzoEILU
-    port: 47655
-    server: 36.151.251.59
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1E8\U0001F1E6加拿大1 | ⬇️ 144KB/s"
-    password: RlzoEILU
-    port: 3744
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1E6\U0001F1FA澳大利亚1 | ⬇️ 429KB/s"
-    password: RlzoEILU
-    port: 40252
-    server: 36.156.102.121
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1ED\U0001F1F0香港2 | ⬇️ 1.8MB/s"
-    password: RlzoEILU
-    port: 46861
-    server: 36.156.102.124
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1ED\U0001F1F0香港3 | ⬇️ 340KB/s"
-    password: RlzoEILU
-    port: 39689
-    server: 36.156.102.115
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1F3\U0001F1F1荷兰1 | ⬇️ 290KB/s"
-    password: RlzoEILU
-    port: 8565
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1E8\U0001F1E6加拿大2 | ⬇️ 607KB/s"
-    password: RlzoEILU
-    port: 48069
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1E9\U0001F1EA德国1 | ⬇️ 3.5MB/s"
-    password: RlzoEILU
-    port: 36654
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1ED\U0001F1F0香港4 | ⬇️ 474KB/s"
-    password: RlzoEILU
-    port: 54167
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1ED\U0001F1F0香港5 | ⬇️ 1020KB/s"
-    password: RlzoEILU
-    port: 5800
-    server: 36.156.102.124
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1F8\U0001F1EC新加坡1 | ⬇️ 518KB/s"
-    password: RlzoEILU
-    port: 41067
-    server: 36.151.251.57
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1EF\U0001F1F5日本1 | ⬇️ 160KB/s"
-    password: RlzoEILU
-    port: 4092
-    server: 36.151.251.59
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1EF\U0001F1F5日本2 | ⬇️ 1.3MB/s"
-    password: RlzoEILU
-    port: 11713
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1F8\U0001F1EC新加坡2 | ⬇️ 2.6MB/s"
-    password: RlzoEILU
-    port: 29930
-    server: 36.151.251.62
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1ED\U0001F1F0香港6 | ⬇️ 7.7MB/s"
-    password: RlzoEILU
-    port: 3754
-    server: 36.151.251.60
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1EC\U0001F1E7英国1 | ⬇️ 1.0MB/s"
-    password: RlzoEILU
-    port: 8513
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1FA\U0001F1F8美国1 | ⬇️ 704KB/s"
-    password: RlzoEILU
-    port: 41081
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1E6\U0001F1FA澳大利亚2 | ⬇️ 3.0MB/s"
-    password: RlzoEILU
-    port: 11641
-    server: 36.151.251.59
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1FA\U0001F1F8美国2 | ⬇️ 367KB/s"
-    password: RlzoEILU
-    port: 3597
-    server: 36.151.251.59
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1F0\U0001F1F7韩国3 | ⬇️ 5.7MB/s"
-    password: RlzoEILU
-    port: 28548
-    server: 36.151.251.62
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1EF\U0001F1F5日本3 | ⬇️ 205KB/s"
-    password: RlzoEILU
-    port: 25253
-    server: 36.151.251.57
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1FA\U0001F1F8美国3 | ⬇️ 406KB/s"
-    password: RlzoEILU
-    port: 42163
-    server: 36.151.251.59
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1F3\U0001F1F1荷兰2 | ⬇️ 696KB/s"
-    password: RlzoEILU
-    port: 15407
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1F0\U0001F1F7韩国4 | ⬇️ 360KB/s"
-    password: RlzoEILU
-    port: 44907
-    server: 36.151.251.59
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1F3\U0001F1F1荷兰3 | ⬇️ 688KB/s"
-    password: RlzoEILU
-    port: 33097
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1EC\U0001F1E7英国2 | ⬇️ 3.5MB/s"
-    password: RlzoEILU
-    port: 30656
-    server: 36.156.102.121
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1FA\U0001F1F8美国4 | ⬇️ 8.4MB/s"
-    password: RlzoEILU
-    port: 55860
-    server: 36.151.251.59
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1ED\U0001F1F0香港7 | ⬇️ 5.3MB/s"
-    password: RlzoEILU
-    port: 16322
-    server: 223.111.144.13
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1ED\U0001F1F0香港8 | ⬇️ 415KB/s"
-    password: RlzoEILU
-    port: 11796
-    server: 36.151.251.59
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1EF\U0001F1F5日本4 | ⬇️ 4.2MB/s"
-    password: RlzoEILU
-    port: 36587
-    server: 36.151.251.59
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1EF\U0001F1F5日本5 | ⬇️ 1.2MB/s"
-    password: RlzoEILU
-    port: 42003
-    server: 36.151.251.57
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1ED\U0001F1F0香港9 | ⬇️ 463KB/s"
-    password: RlzoEILU
-    port: 19220
-    server: 36.156.102.121
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1ED\U0001F1F0香港10 | ⬇️ 1.6MB/s"
-    password: RlzoEILU
-    port: 48959
-    server: 36.156.102.115
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1EF\U0001F1F5日本6 | ⬇️ 536KB/s"
-    password: RlzoEILU
-    port: 17587
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1EF\U0001F1F5日本7 | ⬇️ 1.0MB/s"
-    password: RlzoEILU
-    port: 50846
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1F8\U0001F1EC新加坡3 | ⬇️ 2.3MB/s"
-    password: RlzoEILU
-    port: 54980
-    server: 36.151.251.62
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1FA\U0001F1F8美国5 | ⬇️ 9.2MB/s"
-    password: RlzoEILU
-    port: 23873
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1ED\U0001F1F0香港11 | ⬇️ 7.1MB/s"
-    password: RlzoEILU
-    port: 17740
-    server: 36.156.102.118
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1F3\U0001F1F1荷兰4 | ⬇️ 357KB/s"
-    password: RlzoEILU
-    port: 29769
-    server: 36.151.251.62
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1E9\U0001F1EA德国2 | ⬇️ 345KB/s"
-    password: RlzoEILU
-    port: 7789
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1FA\U0001F1F8美国6 | ⬇️ 2.1MB/s"
-    password: RlzoEILU
-    port: 52343
-    server: 36.151.251.59
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1FA\U0001F1F8美国7 | ⬇️ 2.1MB/s"
-    password: RlzoEILU
-    port: 50757
-    server: 36.156.102.121
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1ED\U0001F1F0香港12 | ⬇️ 6.1MB/s"
-    password: RlzoEILU
-    port: 34041
-    server: 36.156.102.118
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1F3\U0001F1F1荷兰5 | ⬇️ 814KB/s"
-    password: RlzoEILU
-    port: 16641
-    server: 36.151.251.61
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-  - alpn:
-      - h2
-      - http/1.1
-    name: "\U0001F1ED\U0001F1F0香港13 | ⬇️ 3.5MB/s"
-    password: RlzoEILU
-    port: 28296
-    server: 36.156.102.123
-    skip-cert-verify: true
-    sni: www.baidu.com
-    type: trojan
-    udp: true
-rule-providers:
-  private:
-    url: >-
-      https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.yaml
-    path: ./ruleset/private.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  cn_domain:
-    url: >-
-      https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cn.yaml
-    path: ./ruleset/cn_domain.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  telegram_domain:
-    url: >-
-      https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/telegram.yaml
-    path: ./ruleset/telegram_domain.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  google_domain:
-    url: >-
-      https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google.yaml
-    path: ./ruleset/google_domain.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  geolocation-!cn:
-    url: >-
-      https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/geolocation-!cn.yaml
-    path: ./ruleset/geolocation-!cn.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  cn_ip:
-    url: >-
-      https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cn.yaml
-    path: ./ruleset/cn_ip.yaml
-    behavior: ipcidr
-    interval: 86400
-    format: yaml
-    type: http
-  telegram_ip:
-    url: >-
-      https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/telegram.yaml
-    path: ./ruleset/telegram_ip.yaml
-    behavior: ipcidr
-    interval: 86400
-    format: yaml
-    type: http
-  google_ip:
-    url: >-
-      https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/google.yaml
-    path: ./ruleset/google_ip.yaml
-    behavior: ipcidr
-    interval: 86400
-    format: yaml
-    type: http
-  bing:
-    url: >-
-      https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml
-    path: ./ruleset/bing.yaml
-    behavior: classical
-    interval: 86400
-    format: yaml
-    type: http
-  copilot:
-    url: >-
-      https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Copilot/Copilot.yaml
-    path: ./ruleset/copilot.yaml
-    behavior: classical
-    interval: 86400
-    format: yaml
-    type: http
-  claude:
-    url: >-
-      https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Claude/Claude.yaml
-    path: ./ruleset/claude.yaml
-    behavior: classical
-    interval: 86400
-    format: yaml
-    type: http
-  bard:
-    url: >-
-      https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BardAI/BardAI.yaml
-    path: ./ruleset/bard.yaml
-    behavior: classical
-    interval: 86400
-    format: yaml
-    type: http
-  openai:
-    url: >-
-      https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml
-    path: ./ruleset/openai.yaml
-    behavior: classical
-    interval: 86400
-    format: yaml
-    type: http
-  steam:
-    url: >-
-      https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Steam/Steam.yaml
-    path: ./ruleset/steam.yaml
-    behavior: classical
-    interval: 86400
-    format: yaml
-    type: http
+port: 7890
+allow-lan: true
+bind-address: '*'
+mode: rule
+log-level: info
+unified-delay: true
+global-client-fingerprint: chrome
+external-controller: :9090
+
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip # redir-host
+  listen: 0.0.0.0:7874
+  nameserver:
+  - tls://1.1.1.1
+  - tls://8.8.8.8
+  - 1.1.1.1
+  - 8.8.8.8
+  - https://cloudflare-dns.com/dns-query
+  - https://dns.google/dns-query
+  default-nameserver:
+  - tls://1.12.12.12
+  - 119.29.29.29
+  - 223.5.5.5
+  - 223.6.6.6
+  
+  fallback:
+    - tls://1.1.1.1:853
+    - tls://8.8.8.8:853
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - '*.lan'
+    - 'localhost.ptlogin2.qq.com'
+    - 'dns.msftncsi.com'
+    - 'www.msftncsi.com'
+    - 'www.msftconnecttest.com'
+
+###开始建立锚点
+
+# 自动选择(高速)
+fly: &fly {type: url-test, url: "http://www.google.com/generate_204", interval: 300, tolerance: 50, lazy: true, use: [订阅 1, ]}
+
+# 节点选择
+all: &all {type: select, use: [订阅 1, 订阅 2]}
+
+# 解锁 AI
+ai: &ai {type: url-test, url: "http://www.google.com/generate_204", interval: 120, tolerance: 50, lazy: true, use: [订阅 1, 订阅 2], filter: "(?!.*(hong kong|hk|香港|香|港|香港 01))"}
+
+# 备用应急
+backup: &backup {type: url-test, url: "http://www.google.com/generate_204", interval: 300, tolerance: 50, lazy: true, use: [订阅 2]}
+
+# 订阅更新和延迟测试相关
+p: &p {type: http, interval: 21600, health-check: {enable: true, url: "http://www.google.com/generate_204", interval: 1800, filter: "(?i)^(?!unavailable).*$"}}
+
+###结束建立锚点
+
+proxy-providers:  # Meta支持机场通用订阅
+
+  订阅 1: # XQ节点（自用高速）
+    <<: *p
+    url: "https://gist.githubusercontent.com/byrisk/904fcf74c6299b728fb2b83d621832dd/raw/a99002f6e03bc9eca0d7ea4a4af533f0dd8a8760/MQconfig"
+
+  订阅 2: # 网络收集
+    <<: *p
+    url: "https://gist.githubusercontent.com/byrisk/172280d15a99a420c2ec0d190be8e40a/raw/515ae2eddd954116eee7330af025e617b084a7fa/all.yaml"
+  
+      
+  # 订阅 3: # 备用节点
+  #   <<: *p
+  #   url: "https://sub.ndllz.me/backup"
+    
+  # 订阅 4: # 备用节点
+  #   <<: *p
+  #   url: "https://sub.ndllz.me/serv00"
+    
+
 proxy-groups:
-  - icon: 'https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Static.png'
-    include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
-    name: PROXY
+
+# 功能分组
+  
+
+  - name: 🚀 自动选择
+    <<: *fly
+    filter: "(?i)^(?!unavailable).*$"
+    
+  - name: 🌏️ 节点选择
+    <<: *all
+    filter: "(?i)^(?!unavailable).*$"
+
+  - name: 🔀 AI 服务
     type: select
     proxies:
-      - AUTO
-      - HK AUTO
-      - SG AUTO
-      - JP AUTO
-      - US AUTO
-  - icon: 'https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Urltest.png'
-    include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
-    name: AUTO
-    type: url-test
-    interval: 300
-  - icon: 'https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/OpenAI.png'
-    name: AIGC
+      - ✅ 解锁 AI
+
+  - name: ⬇ 备用应急
+    <<: *backup
+    filter: "(?i)^(?!unavailable).*$"
+
+  - name: ✅ 解锁 AI
+    <<: *ai
+
+  - name: ⛔️ 拦截广告
     type: select
     proxies:
-      - SG AUTO
-      - JP AUTO
-      - US AUTO
-  - icon: 'https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Telegram.png'
-    name: Telegram
+      - "DIRECT"
+      - "REJECT"
+
+  - name: ↪️ 漏网之鱼
     type: select
     proxies:
-      - HK AUTO
-      - SG AUTO
-      - JP AUTO
-      - US AUTO
-  - icon: 'https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Google.png'
-    name: Google
-    type: select
-    proxies:
-      - HK AUTO
-      - SG AUTO
-      - JP AUTO
-      - US AUTO
-  - icon: 'https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png'
-    include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
-    filter: "(?i)香港|Hong Kong|HK|\U0001F1ED\U0001F1F0"
-    name: HK AUTO
-    type: url-test
-    interval: 300
-  - icon: 'https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/SG.png'
-    include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
-    filter: "(?i)新加坡|Singapore|\U0001F1F8\U0001F1EC"
-    name: SG AUTO
-    type: url-test
-    interval: 300
-  - icon: 'https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/JP.png'
-    include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
-    filter: "(?i)日本|Japan|\U0001F1EF\U0001F1F5"
-    name: JP AUTO
-    type: url-test
-    interval: 300
-  - icon: 'https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/US.png'
-    include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
-    filter: "(?i)美国|USA|\U0001F1FA\U0001F1F8"
-    name: US AUTO
-    type: url-test
-    interval: 300
-  - icon: 'https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png'
-    include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置
-    proxies:
-      - PROXY
-      - AUTO
-      - AIGC
-      - Telegram
-      - Google
-      - HK AUTO
-      - SG AUTO
-      - JP AUTO
-      - US AUTO
-    name: GLOBAL
-    type: select
+      - 🌏️ 节点选择
+      - DIRECT
+
+# 规则
 rules:
-  - 'PROCESS-NAME,subs-check.exe,DIRECT'
-  - 'PROCESS-NAME,subs-check,DIRECT'
-  - 'RULE-SET,private,DIRECT'
-  - 'RULE-SET,bing,AIGC'
-  - 'RULE-SET,copilot,AIGC'
-  - 'RULE-SET,bard,AIGC'
-  - 'RULE-SET,openai,AIGC'
-  - 'RULE-SET,claude,AIGC'
-  - 'RULE-SET,steam,PROXY'
-  - 'RULE-SET,telegram_domain,Telegram'
-  - 'RULE-SET,telegram_ip,Telegram'
-  - 'RULE-SET,google_domain,Google'
-  - 'RULE-SET,google_ip,Google'
-  - 'RULE-SET,geolocation-!cn,PROXY'
-  - 'RULE-SET,cn_domain,DIRECT'
-  - 'RULE-SET,cn_ip,DIRECT'
-  - 'MATCH,PROXY'
+
+  - DOMAIN-SUFFIX,adobe.io,REJECT
+  - DOMAIN-SUFFIX,adobestats.io,REJECT
+  - DOMAIN,lcs-cops.adobe.io,DIRECT
+
+# 解锁AI
+  - RULE-SET,ai,🔀 AI 服务
+  - RULE-SET,Gemini,🔀 AI 服务
+  - RULE-SET,Claude,🔀 AI 服务
+  - DOMAIN,meta.ai,🔀 AI 服务
+  - DOMAIN,claude.ai,🔀 AI 服务
+  - DOMAIN,groq.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,console.anthropic.com,🔀 AI 服务
+  - DOMAIN,anthropic.com,🔀 AI 服务
+  - DOMAIN,claude.ai,🔀 AI 服务
+  - DOMAIN,console.anthropic.com,🔀 AI 服务
+  - DOMAIN,anthropic.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,aistudio.google.com,🔀 AI 服务
+  - DOMAIN,browser-intake-datadoghq.com,🔀 AI 服务
+  - DOMAIN,static.cloudflareinsights.com,🔀 AI 服务
+  - DOMAIN,ai-pro.org,🔀 AI 服务
+  - DOMAIN-SUFFIX,ai.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,algolia.net,🔀 AI 服务
+  - DOMAIN-SUFFIX,api.statsig.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,auth0.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,chatgpt.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,chatgpt.livekit.cloud,🔀 AI 服务
+  - DOMAIN-SUFFIX,client-api.arkoselabs.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,events.statsigapi.net,🔀 AI 服务
+  - DOMAIN-SUFFIX,featuregates.org,🔀 AI 服务
+  - DOMAIN-SUFFIX,host.livekit.cloud,🔀 AI 服务
+  - DOMAIN-SUFFIX,identrust.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,intercom.io,🔀 AI 服务
+  - DOMAIN-SUFFIX,intercomcdn.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,launchdarkly.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,oaistatic.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,oaiusercontent.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,observeit.net,🔀 AI 服务
+  - DOMAIN-SUFFIX,poe.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,segment.io,🔀 AI 服务
+  - DOMAIN-SUFFIX,sentry.io,🔀 AI 服务
+  - DOMAIN-SUFFIX,stripe.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,turn.livekit.cloud,🔀 AI 服务
+  - DOMAIN-KEYWORD,openai,🔀 AI 服务
+
+# 服务类
+  - RULE-SET,TikTok,🔀 AI 服务
+  - RULE-SET,PayPal,🌏️ 节点选择
+  - RULE-SET,telegramcidr,🌏️ 节点选择
+  - DOMAIN-KEYWORD,oaifree,DIRECT
+  - DOMAIN-SUFFIX,shared.oaifree.com,DIRECT
+  
+
+# 屏蔽广告
+  - RULE-SET,AdBlock,⛔️ 拦截广告
+  - RULE-SET,reject,⛔️ 拦截广告
+  - RULE-SET,BanAD,⛔️ 拦截广告
+  - RULE-SET,BanProgramAD,⛔️ 拦截广告
+  - RULE-SET,BanEasyList,⛔️ 拦截广告
+  
+# 补丁规则
+  - RULE-SET,gfw,🌏️ 节点选择
+  - RULE-SET,proxy,🌏️ 节点选择
+  - RULE-SET,tld-not-cn,🌏️ 节点选择
+  - RULE-SET,ProxyGFWlist,🌏️ 节点选择
+  - RULE-SET,ProxyClient,🌏️ 节点选择
+  - RULE-SET,ChinaDomain,DIRECT,no-resolve
+  - RULE-SET,ChinaCompanyIp,DIRECT,no-resolve
+  - RULE-SET,cncidr,DIRECT,no-resolve
+  - RULE-SET,China,DIRECT,no-resolve
+  - RULE-SET,lancidr,DIRECT,no-resolve
+  - RULE-SET,collection,DIRECT,no-resolve
+
+# 默认规则 
+  - GEOIP,CN,DIRECT,no-resolve
+  - GEOSITE,geolocation-cn,DIRECT
+  - GEOSITE,geolocation-!cn,🌏️ 节点选择
+  - MATCH,↪️ 漏网之鱼
+
+rule-providers:
+
+# AI 类
+  ai:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/ai.yaml
+    url: "https://fastly.jsdelivr.net/gh/MadisonWirtanen/WARP-Clash-with-ZJU-Rules@main/ai.yaml"
+    interval: 86400
+    
+  Gemini: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/Gemini.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Gemini.yaml"
+    interval: 86400
+
+  Claude: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/Claude.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Claude.yaml"
+    interval: 86400
+
+# 广告类
+  AdBlock:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/AdBlock.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/AdBlock.yaml"
+    interval: 86400
+    
+  BanAD:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
+    path: ./ruleset/BanAD.yaml
+    interval: 86400
+
+  BanProgramAD:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
+    path: ./ruleset/BanProgramAD.yaml
+    interval: 86400
+
+  BanEasyList:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyList.list"
+    path: ./ruleset/BanEasyList.yaml
+    interval: 86400
+
+  reject:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+    path: ./ruleset/reject.yaml
+    interval: 86400
+
+# 补丁类
+  collection: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/collection.yaml
+    url: "https://gist.githubusercontent.com/cnfree8964/0864fd1d2e88936a095fb40d74ce4993/raw/collection.yaml"
+
+  gfw:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./ruleset/gfw.yaml
+    interval: 86400
+
+  proxy:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
+    path: ./ruleset/proxy.yaml
+    interval: 86400
+
+  tld-not-cn:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
+    path: ./ruleset/tld-not-cn.yaml
+    interval: 86400
+
+  ProxyGFWlist:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
+    path: ./ruleset/BanEasyList.yaml
+    interval: 86400
+
+  ProxyClient: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/ProxyClient.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/ProxyClient.yaml"
+
+  ChinaDomain:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/ChinaDomain.yaml
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list"
+    interval: 86400
+
+  ChinaCompanyIp:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/ChinaCompanyIp.yaml
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list"
+    interval: 86400
+
+  China: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/China.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/China.yaml"
+    interval: 86400
+
+  cncidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
+    path: ./ruleset/cncidr.yaml
+    interval: 86400
+
+  lancidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
+    path: ./ruleset/lancidr.yaml
+    interval: 86400
+
+# 服务类
+  telegramcidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
+    path: ./ruleset/telegramcidr.yaml
+    interval: 86400
+
+  PayPal: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/PayPal.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/PayPal.yaml"
+    interval: 86400
+
+  TikTok: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/TikTok.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/TikTok.yaml"
+    interval: 86400
+
+  IDM: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/IDM.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/IDM.yaml"
+
+# 流媒体
+  Amazon: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/Amazon.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Amazon.yaml"
+    interval: 86400
+
+  Netflix: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/Netflix.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Netflix.yaml"
+    interval: 86400
+
+  Spotify: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/Spotify.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Spotify.yaml"
+    interval: 86400
+    
+  DisneyPlus: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/DisneyPlus.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/DisneyPlus.yaml"
+    
+  Hulu: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/Hulu.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Hulu.yaml"
+
+  HBO: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/HBO.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/HBO.yaml"
+
+# 游戏类
+  Steam: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./rules/Steam.yaml
+    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Steam.yaml"
+    interval: 86400
