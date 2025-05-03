@@ -17,7 +17,7 @@ proxy-providers:
     proxy: 直连 
 
   备用:
-    url: "https://gist.githubusercontent.com/byrisk/172280d15a99a420c2ec0d190be8e40a/raw/515ae2eddd954116eee7330af025e617b084a7fa/all.yaml"
+    url: "https://gist.githubusercontent.com/byrisk/172280d15a99a420c2ec0d190be8e40a/raw/58ad9eaffc561dd14c261825e8886837273a7c6d/all.yaml"
     type: http
     interval: 86400
     health-check:
