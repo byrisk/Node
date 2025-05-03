@@ -47,17 +47,17 @@ dns:
 fly: &fly {type: url-test, url: "http://www.google.com/generate_204", interval: 300, tolerance: 50, lazy: true, use: [订阅 1 ]}
 
 # 自动选择(备用)
-fly2: &fly2 {type: url-test, url: "http://www.google.com/generate_204", interval: 300, tolerance: 50, lazy: true, use: [订阅 2,订阅 3,订阅 4]}
+fly2: &fly2 {type: url-test, url: "http://www.google.com/generate_204", interval: 300, tolerance: 50, lazy: true, use: [订阅 2,订阅 3]}
 # 节点选择(推荐)
 all: &all {type: select, use: [订阅 1]}
 # 节点选择*(All)
-all2: &all2 {type: select, use: [订阅 1, 订阅 2,订阅 3,订阅 4]}
+all2: &all2 {type: select, use: [订阅 1, 订阅 2,订阅 3]}
 
 # 解锁 AI
-ai: &ai {type: url-test, url: "http://www.google.com/generate_204", interval: 120, tolerance: 50, lazy: true, use: [订阅 1, 订阅 2,订阅 3,订阅 4], filter: "(?!.*(hong kong|hk|香港|香|港|香港 01))"}
+ai: &ai {type: url-test, url: "http://www.google.com/generate_204", interval: 120, tolerance: 50, lazy: true, use: [订阅 1, 订阅 2,订阅 3], filter: "(?!.*(hong kong|hk|香港|香|港|香港 01))"}
 
 # 备用应急
-backup: &backup {type: url-test, url: "http://www.google.com/generate_204", interval: 300, tolerance: 50, lazy: true, use: [订阅 2,订阅 3,订阅 4]}
+backup: &backup {type: url-test, url: "http://www.google.com/generate_204", interval: 300, tolerance: 50, lazy: true, use: [订阅 2,订阅 3]}
 
 # 订阅更新和延迟测试相关
 p: &p {type: http, interval: 21600, health-check: {enable: true, url: "http://www.google.com/generate_204", interval: 1800, filter: "(?i)^(?!unavailable).*$"}}
@@ -79,9 +79,9 @@ proxy-providers:  # Meta支持机场通用订阅
     <<: *p
     url: "https://sub.amaoa.xyz/storage?filename=all.yaml&token=sub_ruruo"
 
-  订阅 4: # 备用节点
-    <<: *p
-    url: "http://linuxdo.862368.xyz/proxy.php"
+  # 订阅 4: # 备用节点
+  #   <<: *p
+  #   url: "http://linuxdo.862368.xyz/proxy.php"
 
 
 proxy-groups:
