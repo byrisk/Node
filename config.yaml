@@ -10,23 +10,18 @@ external-controller: :9090
 dns:
   enable: true
   ipv6: false
-  enhanced-mode: fake-ip # redir-host
+  enhanced-mode: fake-ip
   listen: 0.0.0.0:7874
   nameserver:
-  - tls://1.1.1.1
-  - tls://8.8.8.8
-  - 1.1.1.1
-  - 8.8.8.8
-  - https://cloudflare-dns.com/dns-query
-  - https://dns.google/dns-query
+    - tls://1.1.1.1
+    - tls://8.8.8.8
+    - https://cloudflare-dns.com/dns-query
   default-nameserver:
-  - tls://1.12.12.12
-  - 119.29.29.29
-  - 223.5.5.5
-  - 223.6.6.6
+    - 119.29.29.29
+    - 223.5.5.5
   fallback:
-    - tls://1.1.1.1:853
-    - tls://8.8.8.8:853
+    - tls://1.0.0.1:853
+    - tls://8.8.4.4:853
   fallback-filter:
     geoip: true
     geoip-code: CN
@@ -40,234 +35,137 @@ dns:
     - 'www.msftncsi.com'
     - 'www.msftconnecttest.com'
 
-###开始建立锚点
+### 锚点定义
+fly: &fly 
+  type: url-test
+  url: "http://www.google.com/generate_204"
+  interval: 300
+  tolerance: 50
+  lazy: true
 
-# 自动选择(高速)
-fly: &fly {type: url-test, url: "http://www.google.com/generate_204", interval: 300, tolerance: 50, lazy: true, use: [订阅 1 ]}
+fly2: &fly2 
+  type: url-test
+  url: "http://www.google.com/generate_204"
+  interval: 300
+  tolerance: 50
+  lazy: true
 
-# 自动选择(备用)
-fly2: &fly2 {type: url-test, url: "http://www.google.com/generate_204", interval: 300, tolerance: 50, lazy: true, use: [订阅 2,订阅 3]}
-# 节点选择(推荐)
-all: &all {type: select, use: [订阅 1]}
-# 节点选择*(All)
-all2: &all2 {type: select, use: [订阅 1, 订阅 2,订阅 3]}
+all: &all 
+  type: select
 
-# 解锁 AI
-ai: &ai {type: url-test, url: "http://www.google.com/generate_204", interval: 120, tolerance: 50, lazy: true, use: [订阅 1, 订阅 2,订阅 3], filter: "(?!.*(hong kong|hk|香港|香|港|香港 01))"}
+p: &p 
+  type: http
+  interval: 21600
+  health-check: 
+    enable: true
+    url: "http://www.google.com/generate_204"
+    interval: 1800
+    filter: "(?i)^(?!unavailable).*$"
 
-# 备用应急
-backup: &backup {type: url-test, url: "http://www.google.com/generate_204", interval: 300, tolerance: 50, lazy: true, use: [订阅 2,订阅 3]}
-
-# 订阅更新和延迟测试相关
-p: &p {type: http, interval: 21600, health-check: {enable: true, url: "http://www.google.com/generate_204", interval: 1800, filter: "(?i)^(?!unavailable).*$"}}
-
-###结束建立锚点
-
-proxy-providers:  # Meta支持机场通用订阅
-
-  订阅 1: # XQ节点（自用高速）
+### 代理提供商
+proxy-providers:
+  订阅1:
     <<: *p
     url: "https://gist.githubusercontent.com/byrisk/904fcf74c6299b728fb2b83d621832dd/raw/a99002f6e03bc9eca0d7ea4a4af533f0dd8a8760/MQconfig"
+    path: ./providers/订阅1.yaml
 
-  订阅 2: # 备用节点
+  订阅2:
     <<: *p
     url: "https://gist.githubusercontent.com/byrisk/172280d15a99a420c2ec0d190be8e40a/raw/515ae2eddd954116eee7330af025e617b084a7fa/all.yaml"
+    path: ./providers/订阅2.yaml
 
-  订阅 3: # 备用节点
+  订阅3:
     <<: *p
-    url: "https://e6bgteon34.yjbpi.cn/ND-D7/E55oa/ch"
+    url: "https://linuxdo.862368.xyz/proxy.php"  # 改为HTTPS
+    path: ./providers/订阅3.yaml
 
-  # 订阅 4: # 备用节点
-  #   <<: *p
-  #   url: "http://linuxdo.862368.xyz/proxy.php"
-
-
+### 代理组
 proxy-groups:
-
-# 功能分组
-
-# 自动选择(推荐_自用高速)
   - name: 🚀 自动选择(推荐_自用高速)
     <<: *fly
+    use: [订阅1]
     filter: "(?i)^(?!unavailable).*$"
   
-# 节点选择(自用高速)
   - name: 🚀节点选择(推荐_自用高速)
-    proxies:
-      - "DIRECT"
     <<: *all
+    use: [订阅1]
     filter: "(?i)^(?!unavailable).*$"
   
-# 自动选择(备用)
   - name: 🚀 自动选择(备用)
     <<: *fly2
+    use: [订阅2, 订阅3]
     filter: "(?i)^(?!unavailable).*$"
 
-# 节点选择（ All ）
-  - name: 🌏️ 节点选择（ All ）
-    proxies:
-    - "DIRECT"
-    <<: *all2
+  - name: 🌏️ 节点选择(All)
+    <<: *all
+    use: [订阅1, 订阅2, 订阅3]
     filter: "(?i)^(?!unavailable).*$"
 
   - name: 🔀 AI 服务
     type: select
     proxies:
       - ✅ 解锁 AI
-
-  - name: ⬇ 备用应急
-    <<: *backup
-    filter: "(?i)^(?!unavailable).*$"
+      - DIRECT
 
   - name: ✅ 解锁 AI
-    <<: *ai
+    type: url-test
+    url: "http://www.google.com/generate_204"
+    interval: 120
+    tolerance: 50
+    lazy: true
+    use: [订阅1, 订阅2, 订阅3]
+    filter: "(?!.*(hong kong|hk|香港|香|港|香港 01))"
 
   - name: ⛔️ 拦截广告
     type: select
     proxies:
-      - "DIRECT"
-      - "REJECT"
+      - REJECT
+      - DIRECT
 
   - name: ↪️ 漏网之鱼
     type: select
     proxies:
-      - 🌏️ 节点选择（ All ）
+      - 🌏️ 节点选择(All)
       - 🚀节点选择(推荐_自用高速)
+      - 🚀 自动选择(推荐_自用高速)
       - DIRECT
 
-# 规则
+### 规则
 rules:
+  # AI服务
+  - DOMAIN-SUFFIX,openai.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,anthropic.com,🔀 AI 服务
+  - DOMAIN-SUFFIX,claude.ai,🔀 AI 服务
+  - DOMAIN-SUFFIX,gemini.google.com,🔀 AI 服务
+  - DOMAIN-KEYWORD,openai,🔀 AI 服务
+  - RULE-SET,ai,🔀 AI 服务
 
+  # 广告拦截
+  - RULE-SET,reject,⛔️ 拦截广告
   - DOMAIN-SUFFIX,adobe.io,REJECT
   - DOMAIN-SUFFIX,adobestats.io,REJECT
-  - DOMAIN,lcs-cops.adobe.io,DIRECT
 
-# 解锁AI
-  - RULE-SET,ai,🔀 AI 服务
-  - RULE-SET,Gemini,🔀 AI 服务
-  - RULE-SET,Claude,🔀 AI 服务
-  - DOMAIN,meta.ai,🔀 AI 服务
-  - DOMAIN,claude.ai,🔀 AI 服务
-  - DOMAIN,groq.com,🔀 AI 服务
-  - DOMAIN-SUFFIX,console.anthropic.com,🔀 AI 服务
-  - DOMAIN,anthropic.com,🔀 AI 服务
-  - DOMAIN-SUFFIX,aistudio.google.com,🔀 AI 服务
-  - DOMAIN,browser-intake-datadoghq.com,🔀 AI 服务
-  - DOMAIN,static.cloudflareinsights.com,🔀 AI 服务
-  - DOMAIN,ai-pro.org,🔀 AI 服务
-  - DOMAIN-SUFFIX,ai.com,🔀 AI 服务
-  - DOMAIN-SUFFIX,algolia.net,🔀 AI 服务
-  - DOMAIN-SUFFIX,api.statsig.com,🔀 AI 服务
-  - DOMAIN-SUFFIX,auth0.com,🔀 AI 服务
-  - DOMAIN-SUFFIX,chatgpt.com,🔀 AI 服务
-  - DOMAIN-SUFFIX,chatgpt.livekit.cloud,🔀 AI 服务
-  - DOMAIN-SUFFIX,client-api.arkoselabs.com,🔀 AI 服务
-  - DOMAIN-SUFFIX,events.statsigapi.net,🔀 AI 服务
-  - DOMAIN-SUFFIX,featuregates.org,🔀 AI 服务
-  - DOMAIN-SUFFIX,host.livekit.cloud,🔀 AI 服务
-  - DOMAIN-SUFFIX,identrust.com,🔀 AI 服务
-  - DOMAIN-SUFFIX,intercom.io,🔀 AI 服务
-  - DOMAIN-SUFFIX,intercomcdn.com,🔀 AI 服务
-  - DOMAIN-SUFFIX,launchdarkly.com,🔀 AI 服务
-  - DOMAIN-SUFFIX,oaistatic.com,🔀 AI 服务
-  - DOMAIN-SUFFIX,oaiusercontent.com,🔀 AI 服务
-  - DOMAIN-SUFFIX,observeit.net,🔀 AI 服务
-  - DOMAIN-SUFFIX,poe.com,🔀 AI 服务
-  - DOMAIN-SUFFIX,segment.io,🔀 AI 服务
-  - DOMAIN-SUFFIX,sentry.io,🔀 AI 服务
-  - DOMAIN-SUFFIX,stripe.com,🔀 AI 服务
-  - DOMAIN-SUFFIX,turn.livekit.cloud,🔀 AI 服务
-  - DOMAIN-KEYWORD,openai,🔀 AI 服务
+  # 国内直连
+  - RULE-SET,private,DIRECT
+  - RULE-SET,cncidr,DIRECT
+  - RULE-SET,china,DIRECT
+  - GEOIP,CN,DIRECT
 
-# 服务类
-  - RULE-SET,TikTok,🔀 AI 服务
-  - RULE-SET,PayPal,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
-  - RULE-SET,telegramcidr,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
-  - DOMAIN-KEYWORD,oaifree,DIRECT
-  - DOMAIN-SUFFIX,shared.oaifree.com,DIRECT
+  # 代理规则
+  - RULE-SET,proxy,🌏️ 节点选择(All)
+  - RULE-SET,gfw,🌏️ 节点选择(All)
+  - RULE-SET,tld-not-cn,🌏️ 节点选择(All)
 
-
-# 屏蔽广告
-  - RULE-SET,AdBlock,⛔️ 拦截广告
-  - RULE-SET,reject,⛔️ 拦截广告
-  - RULE-SET,BanAD,⛔️ 拦截广告
-  - RULE-SET,BanProgramAD,⛔️ 拦截广告
-  - RULE-SET,BanEasyList,⛔️ 拦截广告
-
-# 补丁规则
-  - RULE-SET,gfw,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
-  - RULE-SET,proxy,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
-  - RULE-SET,tld-not-cn,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
-  - RULE-SET,ProxyGFWlist,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
-  - RULE-SET,ProxyClient,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
-  - RULE-SET,ChinaDomain,DIRECT,no-resolve
-  - RULE-SET,ChinaCompanyIp,DIRECT,no-resolve
-  - RULE-SET,cncidr,DIRECT,no-resolve
-  - RULE-SET,China,DIRECT,no-resolve
-  - RULE-SET,lancidr,DIRECT,no-resolve
-  - RULE-SET,collection,DIRECT,no-resolve
-
-# 默认规则 
-  - GEOIP,CN,DIRECT,no-resolve
-  - GEOSITE,geolocation-cn,DIRECT
-  - GEOSITE,geolocation-!cn,🌏️ 节点选择（ All ）,🚀节点选择(推荐_自用高速)
+  # 最终规则
   - MATCH,↪️ 漏网之鱼
 
+### 规则集
 rule-providers:
-
-# AI 类
   ai:
     type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/ai.yaml
-    url: "https://fastly.jsdelivr.net/gh/MadisonWirtanen/WARP-Clash-with-ZJU-Rules@main/ai.yaml"
-    interval: 86400
-
-  Gemini: 
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/Gemini.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Gemini.yaml"
-    interval: 86400
-
-  Claude: 
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/Claude.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Claude.yaml"
-    interval: 86400
-
-# 广告类
-  AdBlock:
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/AdBlock.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/AdBlock.yaml"
-    interval: 86400
-
-  BanAD:
-    type: http
     behavior: domain
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
-    path: ./ruleset/BanAD.yaml
-    interval: 86400
-
-  BanProgramAD:
-    type: http
-    behavior: domain
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
-    path: ./ruleset/BanProgramAD.yaml
-    interval: 86400
-
-  BanEasyList:
-    type: http
-    behavior: domain
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyList.list"
-    path: ./ruleset/BanEasyList.yaml
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/ai.txt"
+    path: ./ruleset/ai.yaml
     interval: 86400
 
   reject:
@@ -277,71 +175,11 @@ rule-providers:
     path: ./ruleset/reject.yaml
     interval: 86400
 
-# 补丁类
-  collection: 
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/collection.yaml
-    url: "https://gist.githubusercontent.com/cnfree8964/0864fd1d2e88936a095fb40d74ce4993/raw/collection.yaml"
-
-  gfw:
+  private:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
-    path: ./ruleset/gfw.yaml
-    interval: 86400
-
-  proxy:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
-    path: ./ruleset/proxy.yaml
-    interval: 86400
-
-  tld-not-cn:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
-    path: ./ruleset/tld-not-cn.yaml
-    interval: 86400
-
-  ProxyGFWlist:
-    type: http
-    behavior: domain
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
-    path: ./ruleset/ProxyGFWlist.yaml
-    interval: 86400
-
-  ProxyClient: 
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/ProxyClient.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/ProxyClient.yaml"
-
-  ChinaDomain:
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/ChinaDomain.yaml
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list"
-    interval: 86400
-
-  ChinaCompanyIp:
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/ChinaCompanyIp.yaml
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list"
-    interval: 86400
-
-  China: 
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/China.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/China.yaml"
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt"
+    path: ./ruleset/private.yaml
     interval: 86400
 
   cncidr:
@@ -351,95 +189,30 @@ rule-providers:
     path: ./ruleset/cncidr.yaml
     interval: 86400
 
-  lancidr:
+  china:
     type: http
-    behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
-    path: ./ruleset/lancidr.yaml
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/china.txt"
+    path: ./ruleset/china.yaml
     interval: 86400
 
-# 服务类
-  telegramcidr:
+  proxy:
     type: http
-    behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
-    path: ./ruleset/telegramcidr.yaml
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
+    path: ./ruleset/proxy.yaml
     interval: 86400
 
-  PayPal: 
+  gfw:
     type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/PayPal.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/PayPal.yaml"
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./ruleset/gfw.yaml
     interval: 86400
 
-  TikTok: 
+  tld-not-cn:
     type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/TikTok.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/TikTok.yaml"
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
+    path: ./ruleset/tld-not-cn.yaml
     interval: 86400
-
-  IDM: 
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/IDM.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/IDM.yaml"
-
-# 流媒体
-  Amazon: 
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/Amazon.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Amazon.yaml"
-    interval: 86400
-
-  Netflix: 
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/Netflix.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Netflix.yaml"
-    interval: 86400
-
-  Spotify: 
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/Spotify.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Spotify.yaml"
-    interval: 86400
-
-  DisneyPlus: 
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/DisneyPlus.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/DisneyPlus.yaml"
-
-  Hulu: 
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/Hulu.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Hulu.yaml"
-
-  HBO: 
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/HBO.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/HBO.yaml"
-
-# 游戏类
-  Steam: 
-    type: http
-    behavior: classical
-    format: yaml
-    path: ./rules/Steam.yaml
-    url: "https://cdn.jsdelivr.net/gh/zuluion/Clash-Template-Config@master/Filter/Steam.yaml"
-    interval: 86400    
