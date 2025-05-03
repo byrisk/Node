@@ -122,6 +122,9 @@ default: &default
   proxies: [直连,所有-自动(推荐_高速稳定),所有-手动(推荐_高速稳定),所有-手动,所有-自动,香港-自动,台湾-自动,日本-自动,新加坡-自动,韩国-自动,美国-自动,其他-自动,拒绝]
 
 proxy-groups:
+  - {name: 所有-自动(推荐_高速稳定), type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "^((?!(直连|拒绝|备用)).)*$"}
+  - {name: 所有-手动(推荐_高速稳定), type: select, include-all: true, filter: "^((?!(直连|拒绝|备用)).)*$"}
+
   - {name: Test, <<: *default}
   - {name: ChatGPT, <<: *default}
   - {name: Claude, <<: *default}
@@ -148,11 +151,7 @@ proxy-groups:
   - {name: 国外, <<: *default}
   - {name: 国内, <<: *default}
   - {name: 其他, <<: *default}
-
-  - {name: 所有-自动(推荐_高速稳定), type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "^((?!(直连|拒绝|备用)).)*$"}
-  - {name: 所有-手动(推荐_高速稳定), type: select, include-all: true, filter: "^((?!(直连|拒绝|备用)).)*$"}
   
-
   - {name: 所有-手动, type: select, include-all: true, filter: "^((?!(直连|拒绝)).)*$"}
   - {name: 所有-自动, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "^((?!(直连|拒绝)).)*$"}
   - {name: 香港-自动, type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "(?=.*(广港|香港|HK|Hong Kong|🇭🇰|HongKong)).*$"}
