@@ -27,7 +27,7 @@ jobs:
 
       - name: Sync Gist to Repo
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.XiaoQing }}
           USERNAME: brisk  # 替换为你的GitHub用户名
           REPO_NAME: Node  # 替换为你的仓库名称
           FILE_PATH: config.yaml  # 替换为仓库中文件的路径
