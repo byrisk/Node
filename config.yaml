@@ -75,7 +75,7 @@ proxy-providers:  # Meta支持机场通用订阅
 
   订阅 3: # 备用节点
     <<: *p
-    url: "https://sub.amaoa.xyz/storage?filename=all.yaml&token=sub_ruruo"
+    url: "http://linuxdo.862368.xyz/proxy.php"
 
   # 订阅 4: # 备用节点
   #   <<: *p
