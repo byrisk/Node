@@ -7,7 +7,7 @@
 proxy-providers:
 
   推荐:
-    url: "https://gist.githubusercontent.com/byrisk/904fcf74c6299b728fb2b83d621832dd/raw/a99002f6e03bc9eca0d7ea4a4af533f0dd8a8760/MQconfig"
+    url: "https://gist.githubusercontent.com/byrisk/904fcf74c6299b728fb2b83d621832dd/raw/MQconfig"
     type: http
     interval: 86400
     health-check:
@@ -17,7 +17,7 @@ proxy-providers:
     proxy: 直连 
 
   备用:
-    url: "https://gist.githubusercontent.com/byrisk/172280d15a99a420c2ec0d190be8e40a/raw/58ad9eaffc561dd14c261825e8886837273a7c6d/all.yaml"
+    url: "https://gist.githubusercontent.com/byrisk/172280d15a99a420c2ec0d190be8e40a/raw/all.yaml"
     type: http
     interval: 86400
     health-check:
