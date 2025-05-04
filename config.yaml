@@ -1,323 +1,744 @@
-mixed-port: 9520
-redir-port: 1214
-tproxy-port: 1213
-allow-lan: true
-mode: rule
-ipv6: false
-log-level: debug
+# 代理组配置 (用于订阅链接)
+proxy-providers:
+  p1:
+    type: http
+    url: "https://gist.githubusercontent.com/byrisk/904fcf74c6299b728fb2b83d621832dd/raw/MQconfig.yaml" # 请替换成你的订阅链接
+    interval: 86400
+    proxy: 🔰 模式选择
+    path: ./proxy_providers/p1.yaml # 定义缓存路径
+    health-check:
+      enable: false # 健康检查默认关闭
+      url: http://www.gstatic.com/generate_204
+      interval: 3600
+    override:
+      additional-prefix: "推荐 | " # 节点名称前缀 p1
+      udp: true
+      # interface-name: ""
 
-global-ua: clash-verge/v2.2.4
-global-client-fingerprint: chrome
+# --- 在这里添加其他订阅 ---
+  p2:
+    type: http
+    url: "https://gist.githubusercontent.com/byrisk/172280d15a99a420c2ec0d190be8e40a/raw/all.yaml"
+    interval: 3600
+    path: ./proxy_providers/p2.yaml
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 3600
+    override:
+      additional-prefix: "备用 | "
+      udp: true
 
-unified-delay: true
-tcp-concurrent: true
-enable-process: true
-find-process-mode: strict
-keep-alive-idle: 180
-keep-alive-interval: 15
-disable-keep-alive: false
-profile:
-  store-selected: true
-# GEO数据库
-geodata-mode: true
-geodata-loader: memconservative
-geo-auto-update: true
-geo-update-interval: 48
-geox-url:
-  geoip: "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat"
-  geosite: "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat"
+# 单个代理配置 (用于落地节点)
+proxies:
+  # --- 落地节点 开始 (请替换成你自己的信息) ---
+  - name: webshare # 给你的落地节点起个名字
+    server: "" # 替换成你的落地节点 IP 或域名
+    port: 12345 # 替换成你的落地节点端口
+    type: socks5
+    username: "" # 替换成你的用户名
+    password: "" # 替换成你的密码
+    tls: false
+    skip-cert-verify: true
+    udp: true
+    dialer-proxy: ⚙️ 节点选择
+  # 如果有更多落地节点，在这里继续添加
+  # - name: landing-node-2
+  #   ... # 其他配置
+  #   udp: true # 根据脚本逻辑添加
+  #   dialer-proxy: ⚙️ 节点选择
+  # --- 落地节点 结束 ---
+  # --- 这里通常会由订阅或其他方式填充更多代理节点 ---
+  # - name: "示例节点"
+  #   type: vmess
+  #   server: "server.com"
+  #   port: 443
+  #   uuid: "..."
+  #   alterId: 0
+  #   cipher: auto
+  #   tls: true
+  #   udp: true # 确保添加 udp 支持
 
-# 控制面板,自己决定要不要开启，不建议暴露到公网
-external-controller: 127.0.0.1:9521
-secret: "ApasswordLinuxDo"
-# 嗅探
-sniffer:
-  enable: true
-  force-dns-mapping: true
-  parse-pure-ip: true
-  override-destination: true
-  sniff: # TLS 和 QUIC 默认如果不配置 ports 默认嗅探 443
-    QUIC:
-      ports: [ 443,8443 ]
-    TLS:
-      ports: [443, 8443]
 
-    # 默认嗅探 80
-    HTTP: # 需要嗅探的端口
-      ports: [80,443, 8080-8880]
-      # 可覆盖 sniffer.override-destination
-      override-destination: true
-  skip-domain:
-    - "Mijia Cloud"
-    - "+.push.apple.com"
-    - "mtalk.google.com"
-    - "rule-set:private_domain,lan_non_ip"
-
-# 入站
-tun:
-  enable: true
-  device: Mihomo
-  stack: mixed
-  mtu: 1500
-  dns-hijack:
-    - "any:53"
-    - "tcp://any:53"
-  auto-router: true
-  auto-detect-interface: true
-  strict-route: true
-# hosts规则
-
-# dns模块
+# DNS 配置
 dns:
   enable: true
-  cache-algorithm: arc
-  prefer-h3: true
-  use-hosts: true
-  use-system-hosts: false # 是否使用系统hosts，需要就开启下
   listen: 0.0.0.0:1053
-  ipv6: false
-  respect-rules: false
-  enhanced-mode: redir-host
-  fake-ip-range: 10.0.0.1/16  # tun和fake模式下的ip段，tun的网卡使用此ip段，确保无冲突
+  # ipv6: true  # 根据需要取消注释
+  prefer-h3: false
+  respect-rules: true
+  use-system-hosts: false
+  cache-algorithm: arc
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - '+.lan'
+    - '+.local'
+    - '+.msftconnecttest.com'
+    - '+.msftncsi.com'
+    - 'localhost.ptlogin2.qq.com'
+    - 'localhost.sec.qq.com'
+    - 'localhost.work.weixin.qq.com'
   default-nameserver:
-    - quic://223.5.5.5
-    - tls://1.12.12.12
+    - 223.5.5.5
+    - 1.2.4.8
   nameserver:
-    - quic://fly.dns.vlo.cc
+    - https://cloudflare-dns.com/dns-query # CloudflareDNS
+    - https://77.88.8.8/dns-query # YandexDNS
+    - 'https://8.8.4.4/dns-query#ecs=1.1.1.1/24&ecs-override=true' # GoogleDNS (带 ECS)
+    - 'https://208.67.222.222/dns-query#ecs=1.1.1.1/24&ecs-override=true' # OpenDNS (带 ECS)
   proxy-server-nameserver:
-    - https://v4.vlo.cc/520/psn
+    - https://223.5.5.5/dns-query # 阿里DoH
+    - https://doh.pub/dns-query # 腾讯DoH
+  direct-nameserver:
+    - https://223.5.5.5/dns-query # 阿里DoH
+    - https://doh.pub/dns-query # 腾讯DoH
+  direct-nameserver-follow-policy: false
+  nameserver-policy:
+    'geosite:cn':
+      - https://223.5.5.5/dns-query # 阿里DoH
+      - https://doh.pub/dns-query # 腾讯DoH
 
-
-# 订阅合并/重命名      
-p: &p {
-  type: http,
-  udp: true,
-  interval: 21600,
-  smux: {
-    enabled: true,
-    padding: true,
-    brutal-opts: {
-      enabled: true,
-      },
-  },
-}
-u: &u 
-  use:
-    - dy1
-    - dy2
-    - dy3
-
-
-
-# 订阅配置
-proxy-providers:
-  dy1:
-    <<: *p
-    # 节点文件 p1对应provider1
-    path: ./proxy_provider/p1.yaml
-    # 订阅链接
-    url: "https://gist.githubusercontent.com/byrisk/904fcf74c6299b728fb2b83d621832dd/raw/MQconfig.yaml"
-    exclude-filter: "(?i)剩余|距离|套餐|官网|建议"  # 排除关键词，看自己是否需要排除
-    # 节点名称前缀 p1，区分不同机场订阅
-    override:
-      additional-prefix: "推荐 |"
-
-  dy2:
-    <<: *p
-    path: ./proxy_provider/p2.yaml
-    url: "https://gist.githubusercontent.com/byrisk/172280d15a99a420c2ec0d190be8e40a/raw/all.yaml"
-    exclude-filter: "(?i)剩余|距离|套餐|官网|建议"
-    override:
-      additional-prefix: "备用 |"
-  dy3:
-    <<: *p
-    path: ./proxy_provider/p3.yaml
-    url: 
-    exclude-filter: "(?i)剩余|距离|套餐|官网|建议"
-    override:
-      additional-prefix: "dy3 |"
-
-proxies:   
-
-  - {name: Direct, type: direct, udp: true}
-
-
-
-# 策略组配置
-ouo: &ouo {type: select,proxies: [Mode,Manual,Auto,负载-散列,负载-轮询,香港,台湾,日本,新加坡,美国,Direct],<<: *u,url: "https://www.gstatic.com/generate_204",interval: 300,lazy: false,timeout: 5000,max-failed-times: 5}
-proxy-groups:
-  - {name: Mode,type: select,proxies: [Manual,Auto,负载-散列,负载-轮询,香港,台湾,日本,新加坡,美国,],url: "https://www.gstatic.com/generate_204",interval: 300,lazy: false,timeout: 5000,max-failed-times: 5}
-  - {name: Manual, type: select,proxies: [],<<: *u,url: "https://www.gstatic.com/generate_204",interval: 300,lazy: false,timeout: 5000,max-failed-times: 5} 
-  - {name: YouTube, <<: *ouo}
-  - {name: Google, <<: *ouo} 
-  - {name: Microsoft, <<: *ouo}
-  - {name: Apple, <<: *ouo} 
-  - {name: AIGC, <<: *ouo} 
-  - {name: Stream, <<: *ouo} 
-  - {name: Games, <<: *ouo} 
-  - {name: TG, <<: *ouo} 
-  - {name: FCM, <<: *ouo}  
-  - {name: Download, <<: *ouo}  
-  - {name: World, <<: *ouo} 
-  - {name: Auto,type: url-test,proxies: [],<<: *u,url: "https://www.gstatic.com/generate_204",interval: 300,tolerance: 30,lazy: false,timeout: 5000,max-failed-times: 5}   
-  - {name: 香港,type: load-balance,proxies: [],<<: *u, filter: "(?i)港|香港|hk|hongkong" ,url: "https://www.gstatic.com/generate_204",strategy: round-robin,interval: 300,lazy: true,timeout: 5000,max-failed-times: 5}
-  - {name: 台湾,type: load-balance,proxies: [],<<: *u, filter: "(?i)台|台湾|tw|TW" ,url: "https://www.gstatic.com/generate_204",strategy: round-robin,interval: 300,lazy: true,timeout: 5000,max-failed-times: 5}
-  - {name: 日本,type: load-balance,proxies: [],<<: *u, filter: "(?i)日|日本|japan|JP" ,url: "https://www.gstatic.com/generate_204",strategy: round-robin,interval: 300,lazy: true,timeout: 5000,max-failed-times: 5}
-  - {name: 新加坡,type: load-balance,proxies: [],<<: *u, filter: "(?i)新|新加坡|sg|SG" ,url: "https://www.gstatic.com/generate_204",strategy: round-robin,interval: 300,lazy: true,timeout: 5000,max-failed-times: 5} 
-  - {name: 美国,type: load-balance,proxies: [],<<: *u, filter: "(?i)美|美国|us|united states|america|los angeles|san jose|silicon valley|USA|U.S" ,url: "https://www.gstatic.com/generate_204",strategy: round-robin,interval: 300,lazy: true,timeout: 5000,max-failed-times: 5}
-  - {name: 负载-散列,type: load-balance,proxies: [],<<: *u,url: "https://www.gstatic.com/generate_204",strategy: sticky-sessions,interval: 300,lazy: true,timeout: 5000,max-failed-times: 5}
-  - {name: 负载-轮询,type: load-balance,proxies: [],<<: *u,url: "https://www.gstatic.com/generate_204",strategy: round-robin,interval: 300,lazy: true,timeout: 5000,max-failed-times: 5}  
-
-# 规则集
-rule-anchor:
-  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
-  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
-  domain_reject: &domain_reject {type: http, interval: 3600, behavior: domain, format: mrs}
-
+# 规则提供者配置
 rule-providers:
-  # 广告黑名单&白名单，不需要广告拦截可以删掉
-  reject_domain: { <<: *domain_reject, url: https://rules.vlo.cc/dns.mrs}
-  myblack_domain: { <<: *domain_reject, url: https://rules.vlo.cc/myblack.mrs}
-  mywhite_domain: { <<: *domain, url: https://rules.vlo.cc/mywhite.mrs}
+  reject:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: domain
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt
+    path: ./ruleset/loyalsoldier/reject.yaml
+  icloud:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: domain
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt
+    path: ./ruleset/loyalsoldier/icloud.yaml
+  apple:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: domain
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt
+    path: ./ruleset/loyalsoldier/apple.yaml
+  google:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: domain
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt
+    path: ./ruleset/loyalsoldier/google.yaml
+  proxy:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: domain
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt
+    path: ./ruleset/loyalsoldier/proxy.yaml
+  direct:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: domain
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt
+    path: ./ruleset/loyalsoldier/direct.yaml
+  private:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: domain
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt
+    path: ./ruleset/loyalsoldier/private.yaml
+  gfw:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: domain
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt
+    path: ./ruleset/loyalsoldier/gfw.yaml
+  'tld-not-cn': # 引号用于确保 key 正确解析
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: domain
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt
+    path: ./ruleset/loyalsoldier/tld-not-cn.yaml
+  telegramcidr:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: ipcidr
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt
+    path: ./ruleset/loyalsoldier/telegramcidr.yaml
+  cncidr:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: ipcidr
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt
+    path: ./ruleset/loyalsoldier/cncidr.yaml
+  lancidr:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: ipcidr
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt
+    path: ./ruleset/loyalsoldier/lancidr.yaml
+  applications:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: classical
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt
+    path: ./ruleset/loyalsoldier/applications.yaml
+  openai:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: classical
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.yaml
+    path: ./ruleset/MetaCubeX/openai.yaml
+  bybit:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: classical
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/bybit.yaml
+    path: ./ruleset/MetaCubeX/bybit.yaml
+  pikpak:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: classical
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/pikpak.yaml
+    path: ./ruleset/MetaCubeX/pikpak.yaml
+  anthropic:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: classical
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/anthropic.yaml
+    path: ./ruleset/MetaCubeX/anthropic.yaml
+  'google-gemini': # 引号用于确保 key 正确解析
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: classical
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/google-gemini.yaml
+    path: ./ruleset/MetaCubeX/google-gemini.yaml
+  xai:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: classical
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/xai.yaml
+    path: ./ruleset/MetaCubeX/xai.yaml
+  perplexity:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: classical
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/perplexity.yaml
+    path: ./ruleset/MetaCubeX/perplexity.yaml
+  microsoft:
+    type: http
+    format: yaml
+    interval: 86400
+    behavior: classical
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/microsoft.yaml
+    path: ./ruleset/MetaCubeX/microsoft.yaml
 
-  # domain
-    # AI
-  OpenAI_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/openai.mrs}
-  Gemini_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google-gemini.mrs}
-    # 服务
-  fcm_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/googlefcm.mrs}
-  youtube_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs}
-  google_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs}
-  microsoft_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.mrs}
-  onedrive_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/onedrive.mrs}
-  telegram_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs}
-  apple_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple.mrs}
-    # 游戏
-  steam_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/steam.mrs}
-  steamcn_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/steam@cn.mrs}
-  epic_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/epicgames.mrs}
-    # Stream
-  spotify_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/spotify.mrs}
-  netflix_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/netflix.mrs}
-
-    # GEO Rule
-  private_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/private.mrs}
-  geolocation-!cn_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-!cn.mrs}
-  CN_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cn.mrs}
-  geolocation-cn_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-cn.mrs}
-  gfw_domain: { <<: *domain, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs}
-
-  # ip
-    #服务
-  google_ip: { <<: *ip, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs}
-  telegram_ip: { <<: *ip, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs}
-    # Stream
-  netflix_ip: { <<: *ip, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/netflix.mrs}
-
-    # GEO Rule
-  CN_ip: { <<: *ip, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs}
-  private_ip: { <<: *ip, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/private.mrs}
-
-  # class
-    # 补丁
-
-# 狐狐补充规则
-  ai_non_ip: { <<: *domain, url: 'https://rules.vlo.cc/mihomorules/ai_non_ip.mrs'}
-  apple_services_non_ip: { <<: *domain, url: 'https://rules.vlo.cc/mihomorules/apple_services_non_ip.mrs'}
-  cdn_domainset: { <<: *domain, url: 'https://rules.vlo.cc/mihomorules/cdn_domainset.mrs'}
-  cdn_non_ip: { <<: *domain, url: 'https://rules.vlo.cc/mihomorules/cdn_non_ip.mrs'}
-  direct_non_ip: { <<: *domain, url: 'https://rules.vlo.cc/mihomorules/direct_non_ip.mrs'}
-  domestic_non_ip: { <<: *domain, url: 'https://rules.vlo.cc/mihomorules/domestic_non_ip.mrs'}
-  global_non_ip: { <<: *domain, url: 'https://rules.vlo.cc/mihomorules/global_non_ip.mrs'}
-  lan_non_ip: { <<: *domain, url: 'https://rules.vlo.cc/mihomorules/lan_non_ip.mrs'}
-  microsoft_non_ip: { <<: *domain, url: 'https://rules.vlo.cc/mihomorules/microsoft_non_ip.mrs'}
-  stream_non_ip: { <<: *domain, url: 'https://rules.vlo.cc/mihomorules/stream_non_ip.mrs'}
-  telegram_non_ip: { <<: *domain, url: 'https://rules.vlo.cc/mihomorules/telegram_non_ip.mrs'}
-  download_domainset: { <<: *domain, url: 'https://rules.vlo.cc/mihomorules/download_domainset.mrs'}
-  download_non_ip: { <<: *domain, url: 'https://rules.vlo.cc/mihomorules/download_non_ip.mrs'}
-  tg_ip: { <<: *ip, url: 'https://rules.vlo.cc/mihomorules/telegram_ip.mrs'}
-  stream_ip: { <<: *ip, url: 'https://rules.vlo.cc/mihomorules/stream_ip.mrs'}
-  lan_ip: { <<: *ip, url: 'https://rules.vlo.cc/mihomorules/lan_ip.mrs'}
-  domestic_ip: { <<: *ip, url: 'https://rules.vlo.cc/mihomorules/domestic_ip.mrs'}
-
-
-# 分流规则
+# 规则
 rules:
-  # 自定义
-    #前四个都属于广告拦截，mywhite_domain是我自己的一些白名单
-    # 为什么拦截127.0.0.2，因为我dns的广告拦截到127.0.0.2了，防止clash重复发起请求就干脆直接拦截此ip了
-    # REJECT-DROP 表示静默丢弃请求，我的理解是不在日志中记录
-  - IP-CIDR,127.0.0.2/32,REJECT-DROP
-  - RULE-SET,mywhite_domain,Direct
-  - RULE-SET,myblack_domain,REJECT-DROP
-  - RULE-SET,reject_domain,REJECT-DROP
-  - DOMAIN-SUFFIX,jisuts.com,Mode
-  - DOMAIN-SUFFIX,jisuzyv.com,Mode
-  - DST-PORT,22,Direct
-
-  # - Rule Group
-  # GEO Rule 私域
-  - RULE-SET,private_domain,Direct
-  - RULE-SET,lan_non_ip,Direct
-  - RULE-SET,private_ip,Direct
-  - RULE-SET,lan_ip,Direct
-
-  # AI类
-  - RULE-SET,ai_non_ip,AIGC
-  - RULE-SET,OpenAI_domain,AIGC
-  - RULE-SET,Gemini_domain,AIGC
-
-
-  # 服务类
-  - RULE-SET,fcm_domain,FCM
-  - RULE-SET,youtube_domain,YouTube
-  - RULE-SET,google_domain,Google
-  - RULE-SET,google_ip,Google
-
-  - RULE-SET,microsoft_non_ip,Microsoft
-  - RULE-SET,microsoft_domain,Microsoft
-
-  - RULE-SET,onedrive_domain,Microsoft
-
-  - RULE-SET,telegram_non_ip,TG
-  - RULE-SET,telegram_domain,TG
-  - RULE-SET,tg_ip,TG
-  - RULE-SET,telegram_ip,TG
-  - RULE-SET,apple_services_non_ip,Apple
-  - RULE-SET,apple_domain,Apple
-
-  # 游戏类
-  - RULE-SET,steam_domain,Games
-  - RULE-SET,steamcn_domain,Direct
-  - RULE-SET,epic_domain,Games
-
-  # Stream 流媒体类
-  - RULE-SET,stream_non_ip,Stream
-  - RULE-SET,spotify_domain,Stream
-  - RULE-SET,netflix_domain,Stream
-  - RULE-SET,stream_ip,Stream
-  - RULE-SET,netflix_ip,Stream
+  # 额外自定义规则
+  - PROCESS-NAME,steam.exe,🐬 自定义直连
+  - DOMAIN-SUFFIX,immersivetranslate.com,🐳 自定义代理
+  # - DOMAIN-SUFFIX,bing.com,🐳 自定义代理
+  # 自定义规则
+  - DOMAIN-SUFFIX,googleapis.cn,🔰 模式选择
+  - DOMAIN-SUFFIX,gstatic.com,🔰 模式选择
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🔰 模式选择
+  - DOMAIN-SUFFIX,github.io,🔰 模式选择
+  - DOMAIN,v2rayse.com,🔰 模式选择
+  # blackmatrix7 规则集 (脚本中未启用, 这里保留注释)
+  # MetaCubeX 规则集
+  - RULE-SET,openai,💸 ChatGPT-Gemini-XAI-Perplexity
+  - RULE-SET,pikpak,🅿️ PikPak
+  - RULE-SET,bybit,🪙 Bybit
+  - RULE-SET,anthropic,💵 Claude
+  - RULE-SET,google-gemini,💸 ChatGPT-Gemini-XAI-Perplexity
+  - RULE-SET,xai,💸 ChatGPT-Gemini-XAI-Perplexity
+  - RULE-SET,perplexity,💸 ChatGPT-Gemini-XAI-Perplexity
+  # Loyalsoldier 规则集
+  - RULE-SET,applications,🔗 全局直连
+  - RULE-SET,private,🔗 全局直连
+  - RULE-SET,reject,🥰 广告过滤
+  - RULE-SET,microsoft,Ⓜ️ 微软服务
+  - RULE-SET,icloud,🍎 苹果服务
+  - RULE-SET,apple,🍎 苹果服务
+  - RULE-SET,google,📢 谷歌服务
+  - RULE-SET,proxy,🔰 模式选择
+  - RULE-SET,gfw,🔰 模式选择
+  - RULE-SET,tld-not-cn,🔰 模式选择
+  - RULE-SET,direct,🔗 全局直连
+  - RULE-SET,lancidr,🔗 全局直连,no-resolve
+  - RULE-SET,cncidr,🔗 全局直连,no-resolve
+  - RULE-SET,telegramcidr,📲 电报消息,no-resolve
+  # 其他规则
+  - GEOIP,LAN,🔗 全局直连,no-resolve
+  - GEOIP,CN,🔗 全局直连,no-resolve
+  - MATCH,🐟 漏网之鱼
 
 
-  # GEO Rule no cn
-  - RULE-SET,download_domainset,Download
-  - RULE-SET,download_non_ip,Download
-  - RULE-SET,cdn_domainset,Mode
-  - RULE-SET,cdn_non_ip,Mode
-  - RULE-SET,global_non_ip,Mode
-  - RULE-SET,gfw_domain,Mode
-  - RULE-SET,geolocation-!cn_domain,Mode
-  # 代理补丁规则
 
-  # GEO RUle cn 域名
-  - RULE-SET,direct_non_ip,Direct
-  - RULE-SET,domestic_non_ip,Direct
-  - RULE-SET,direct_non_ip,Direct
-  - RULE-SET,geolocation-cn_domain,Direct
-  - RULE-SET,CN_domain,Direct  
-    # DirectIP
-  - RULE-SET,domestic_ip,Direct
-  - RULE-SET,CN_ip,Direct
-    # Direct补丁
-  # 通往世界的隧道 
-  - MATCH,World
+# 代理组配置
+# 注意: 脚本逻辑已为 "⚙️ 节点选择", "♻️ 延迟选优", "⚖️ 负载均衡(散列)", "☁️ 负载均衡(轮询)" 组
+#       自动添加了 exclude-filter 以排除名为 "webshare" 的落地节点。
+#       如果你的落地节点名字不同或有更多，你需要手动更新下面的 exclude-filter 正则表达式。
+proxy-groups:
+  - name: 🔰 模式选择
+    type: select
+    proxies:
+      - ⚙️ 节点选择
+      - 🕊️ 落地节点
+      - 🔗 全局直连
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: ⚙️ 节点选择
+    type: select
+    proxies:
+      - ♻️ 延迟选优
+      - 🚑 故障转移
+      - ⚖️ 负载均衡(散列)
+      - ☁️ 负载均衡(轮询)
+      # - DIRECT # 根据需要可以取消注释DIRECT
+    use: # 引用所有 proxy-providers
+      - p1
+      - p2 # 如果有其他订阅，在这里添加
+    # include-all: true # include-all 与 use 互斥，优先使用 use 指定 provider
+    exclude-filter: '^(?:webshare)$' # 排除落地节点 'webshare' (根据脚本逻辑添加)
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 🕊️ 落地节点
+    type: select
+    proxies:
+      - webshare # 手动列出落地节点名称
+      # - landing-node-2 # 如果有更多，在此添加
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/openwrt.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: ♻️ 延迟选优
+    type: url-test
+    tolerance: 50
+    use:
+      - p1
+      - p2
+    exclude-filter: '^(?:webshare)$' # 排除落地节点 (根据脚本逻辑添加)
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0 # url-test 通常有自己的测试间隔，这里 base 的 interval 设为 0
+    timeout: 3000
+    url: https://www.google.com/generate_204 # url-test 的测试地址
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 🚑 故障转移
+    type: fallback
+    use:
+      - p1
+      - p2
+    # exclude-filter: '^(?:webshare)$' # Fallback 通常不需要排除落地节点，除非你有特殊需求
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/ambulance.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0 # fallback 通常有自己的测试间隔，这里 base 的 interval 设为 0
+    timeout: 3000
+    url: https://www.google.com/generate_204 # fallback 的测试地址
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: ⚖️ 负载均衡(散列)
+    type: load-balance
+    strategy: consistent-hashing
+    use:
+      - p1
+      - p2
+    exclude-filter: '^(?:webshare)$' # 排除落地节点 (根据脚本逻辑添加)
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/merry_go.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0 # load-balance 通常有自己的健康检查间隔
+    timeout: 3000
+    url: https://www.google.com/generate_204 # load-balance 的健康检查地址
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: ☁️ 负载均衡(轮询)
+    type: load-balance
+    strategy: round-robin
+    use:
+      - p1
+      - p2
+    exclude-filter: '^(?:webshare)$' # 排除落地节点 (根据脚本逻辑添加)
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/balance.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0 # load-balance 通常有自己的健康检查间隔
+    timeout: 3000
+    url: https://www.google.com/generate_204 # load-balance 的健康检查地址
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 🌍 国外媒体
+    type: select
+    proxies:
+      - 🔰 模式选择
+      - ⚙️ 节点选择
+      - 🕊️ 落地节点
+      - ♻️ 延迟选优
+      - 🚑 故障转移
+      - ⚖️ 负载均衡(散列)
+      - ☁️ 负载均衡(轮询)
+      - 🔗 全局直连
+    use:
+      - p1
+      - p2
+    # exclude-filter: # 根据需要添加
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/youtube.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 💸 ChatGPT-Gemini-XAI-Perplexity
+    type: select
+    proxies:
+      - 🔰 模式选择
+      - ⚙️ 节点选择
+      - 🕊️ 落地节点
+      - 🔗 全局直连
+      - ♻️ 延迟选优
+      - 🚑 故障转移
+      - ⚖️ 负载均衡(散列)
+      - ☁️ 负载均衡(轮询)
+    use:
+      - p1
+      - p2
+    exclude-filter: "(?i)港|hk|hongkong|hong kong|俄|ru|russia|澳|macao" # 脚本自带的过滤器
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/chatgpt.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 💵 Claude
+    type: select
+    proxies:
+      - 🔰 模式选择
+      - ⚙️ 节点选择
+      - 🕊️ 落地节点
+      - 🔗 全局直连
+      - ♻️ 延迟选优
+      - 🚑 故障转移
+      - ⚖️ 负载均衡(散列)
+      - ☁️ 负载均衡(轮询)
+    use:
+      - p1
+      - p2
+    # exclude-filter: # 根据需要添加
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/claude.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 🪙 Bybit
+    type: select
+    proxies:
+      - 🔰 模式选择
+      - ⚙️ 节点选择
+      - 🕊️ 落地节点
+      - 🔗 全局直连
+      - ♻️ 延迟选优
+      - 🚑 故障转移
+      - ⚖️ 负载均衡(散列)
+      - ☁️ 负载均衡(轮询)
+    use:
+      - p1
+      - p2
+    # exclude-filter: # 根据需要添加
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg # 图标可能需要调整
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 🅿️ PikPak
+    type: select
+    proxies:
+      - 🔰 模式选择
+      - ⚙️ 节点选择
+      - 🕊️ 落地节点
+      - 🔗 全局直连
+      - ♻️ 延迟选优
+      - 🚑 故障转移
+      - ⚖️ 负载均衡(散列)
+      - ☁️ 负载均衡(轮询)
+    use:
+      - p1
+      - p2
+    # exclude-filter: # 根据需要添加
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg # 图标可能需要调整
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 📲 电报消息
+    type: select
+    proxies:
+      - 🔰 模式选择
+      - ⚙️ 节点选择
+      - 🕊️ 落地节点
+      - ♻️ 延迟选优
+      - 🚑 故障转移
+      - ⚖️ 负载均衡(散列)
+      - ☁️ 负载均衡(轮询)
+      - 🔗 全局直连
+    use:
+      - p1
+      - p2
+    # exclude-filter: # 根据需要添加
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/telegram.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 📢 谷歌服务
+    type: select
+    proxies:
+      - 🔰 模式选择
+      - ⚙️ 节点选择
+      - 🕊️ 落地节点
+      - ♻️ 延迟选优
+      - 🚑 故障转移
+      - ⚖️ 负载均衡(散列)
+      - ☁️ 负载均衡(轮询)
+      - 🔗 全局直连
+    use:
+      - p1
+      - p2
+    # exclude-filter: # 根据需要添加
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 🍎 苹果服务
+    type: select
+    proxies:
+      - 🔰 模式选择
+      - ⚙️ 节点选择
+      - 🕊️ 落地节点
+      - ♻️ 延迟选优
+      - 🚑 故障转移
+      - ⚖️ 负载均衡(散列)
+      - ☁️ 负载均衡(轮询)
+      - 🔗 全局直连
+    use:
+      - p1
+      - p2
+    # exclude-filter: # 根据需要添加
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/apple.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: Ⓜ️ 微软服务
+    type: select
+    proxies:
+      - 🔰 模式选择
+      - ⚙️ 节点选择
+      - 🕊️ 落地节点
+      - 🔗 全局直连
+      - ♻️ 延迟选优
+      - 🚑 故障转移
+      - ⚖️ 负载均衡(散列)
+      - ☁️ 负载均衡(轮询)
+    use:
+      - p1
+      - p2
+    # exclude-filter: # 根据需要添加
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/microsoft.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 🥰 广告过滤
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/bug.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 🔗 全局直连
+    type: select
+    proxies:
+      - DIRECT
+      - ⚙️ 节点选择
+      - ♻️ 延迟选优
+      - 🚑 故障转移
+      - ⚖️ 负载均衡(散列)
+      - ☁️ 负载均衡(轮询)
+    # use: # 通常直连组不需要 use provider
+    # include-all: true # 如果你想包含所有独立定义的代理节点，可以取消注释
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: ❌ 全局拦截
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/block.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 🐬 自定义直连
+    type: select
+    proxies:
+      - 🔗 全局直连
+      - 🔰 模式选择
+      - ⚙️ 节点选择
+      - ♻️ 延迟选优
+      - 🚑 故障转移
+      - ⚖️ 负载均衡(散列)
+      - ☁️ 负载均衡(轮询)
+    # use: # 根据需要添加
+    # include-all: true # 根据需要添加
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/unknown.svg # 图标可能需要调整
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 🐳 自定义代理
+    type: select
+    proxies:
+      - 🔰 模式选择
+      - ⚙️ 节点选择
+      - 🕊️ 落地节点
+      - ♻️ 延迟选优
+      - 🚑 故障转移
+      - ⚖️ 负载均衡(散列)
+      - ☁️ 负载均衡(轮询)
+      - 🔗 全局直连
+    use:
+      - p1
+      - p2
+    # exclude-filter: # 根据需要添加
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/openwrt.svg # 图标可能需要调整
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
+
+  - name: 🐟 漏网之鱼
+    type: select
+    proxies:
+      - 🔰 模式选择
+      - ⚙️ 节点选择
+      - 🕊️ 落地节点
+      - ♻️ 延迟选优
+      - 🚑 故障转移
+      - ⚖️ 负载均衡(散列)
+      - ☁️ 负载均衡(轮询)
+      - 🔗 全局直连
+    use:
+      - p1
+      - p2
+    # exclude-filter: # 根据需要添加
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/fish.svg
+    # --- groupBaseOption 展开 ---
+    interval: 0
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    max-failed-times: 3
+    hidden: false
