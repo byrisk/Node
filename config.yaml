@@ -7,9 +7,9 @@ proxy-providers:
     proxy: 🔰 模式选择
     path: ./proxy_providers/p1.yaml # 定义缓存路径
     health-check:
-      enable: false # 健康检查默认关闭
+      enable: true # 健康检查默认关闭
       url: http://www.gstatic.com/generate_204
-      interval: 3600
+      interval: 1800
     override:
       additional-prefix: "推荐 | " # 节点名称前缀 p1
       udp: true
@@ -24,7 +24,7 @@ proxy-providers:
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
-      interval: 3600
+      interval: 1800
     override:
       additional-prefix: "备用 | "
       udp: true
