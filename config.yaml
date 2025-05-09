@@ -3,7 +3,7 @@ proxy-providers:
   p1:
     type: http
     url: "https://gist.githubusercontent.com/byrisk/904fcf74c6299b728fb2b83d621832dd/raw/MQconfig.yaml" # 请替换成你的订阅链接
-    interval: 86400
+    interval: 3600
     proxy: 🔰 模式选择
     path: ./proxy_providers/p1.yaml # 定义缓存路径
     health-check:
@@ -19,7 +19,7 @@ proxy-providers:
   p2:
     type: http
     url: "https://gist.githubusercontent.com/byrisk/172280d15a99a420c2ec0d190be8e40a/raw/all.yaml"
-    interval: 3600
+    interval: 1900
     path: ./proxy_providers/p2.yaml
     health-check:
       enable: true
