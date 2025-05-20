@@ -1,0 +1,22 @@
+name: Run Custom Curl Commands
+
+on:
+  workflow_dispatch: # Allows manual trigger
+  schedule:
+    # Runs every 30 minutes
+    # For more info on cron syntax: https://crontab.guru/
+    - cron: '*/30 * * * *'
+
+jobs:
+  run-curl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make fetch_data.sh executable
+        run: chmod +x fetch_data.sh
+
+      - name: Execute curl commands
+        run: ./fetch_data.sh
