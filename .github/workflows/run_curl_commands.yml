@@ -1,22 +1,23 @@
 name: Run Custom Curl Commands
 
 on:
-  workflow_dispatch: # Allows manual trigger
+  workflow_dispatch: # Allows manual trigger from GitHub UI
   schedule:
-    # Runs every 30 minutes
-    # For more info on cron syntax: https://crontab.guru/
+    # Runs every 30 minutes (at minute 0 and 30 past every hour, UTC)
     - cron: '*/30 * * * *'
 
 jobs:
   run-curl:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # The operating system for the job
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout repository code
+        uses: actions/checkout@v4 # Action to get your repository's code
 
-      - name: Make fetch_data.sh executable
-        run: chmod +x fetch_data.sh
+      - name: Make Workspace_data.sh executable
+        # This step gives execute permission to your script
+        run: chmod +x Workspace_data.sh
 
-      - name: Execute curl commands
-        run: ./fetch_data.sh
+      - name: Execute curl commands from Workspace_data.sh
+        # This step runs your shell script
+        run: ./Workspace_data.sh
