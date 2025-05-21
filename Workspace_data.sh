@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: 运行 curl 命令
         run: |
-          curl -X GET 'https://sapi.egvra.cn/m/reg.aspx?k=aQTmOx4tXvGzXvGyWDcuXfgzbDEuWvGxXjsyXy7dL5deY8KxYDgzXf7hbQxe&sign=67eae8b9f589765e&ver=14&tg=dsv&sec=XfPhK860KfhiX5c1XvKxLJstXRtgOzK=&token' \
+          curl -X GET 'https://sapi.egvra.cn/m/reg.aspx?k=aQTmOx4tXvGzXvGyWDcuXfgzbDEuWvGxXjsyXy7dL5deY8KxYDgzXf7hbQxe' \
           -H 'User-Agent: Dart/3.4 (dart:io)' \
           -H 'Accept-Encoding: gzip' \
           -H 'Content-Type: application/json' \
