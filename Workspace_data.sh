@@ -3,7 +3,7 @@ name: 定时运行 curl 命令
 on:
   schedule:
     # 每 30 分钟运行一次
-    - cron: '*/30 * * * *'
+    - cron: '*/15 * * * *'
   workflow_dispatch:
 
 jobs:
