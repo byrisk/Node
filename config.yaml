@@ -31,7 +31,7 @@ proxy-providers:
 
   p3:
     type: http
-    url: "https://sapi.egvra.cn/m/reg.aspx?k=aQTmOx4tXvGzXvGyWDcuXfgzbDEuWvGxXjsyXy7dL5deY8KxYDgzXf7hbQxe"
+    url: "https://sapi.dkhkz.cn/m/reg.aspx?k=aQTmOx4tXvGzXvGyWDcuXfgzbDEuWvGxXjsyXy7dL5deY8KxYDgzXf7hbQxe"
     interval: 900
 
 
