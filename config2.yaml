@@ -7,7 +7,7 @@ log-level: info
 ipv6: true
 external-controller: 127.0.0.1:9097
 secret: ''
-external-ui-name: xd      #  合并为 external-ui/xd
+external-ui-name: zashboard      #  合并为 external-ui/zashboard
 external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
 
 unified-delay: true
