@@ -7,9 +7,115 @@ log-level: info
 ipv6: true
 external-controller: 127.0.0.1:9097
 secret: ''
+external-ui-name: xd      #  合并为 external-ui/xd
+external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
+
 unified-delay: true
 geodata-mode: false
 global-client-fingerprint: chrome
+external-controller-cors:
+  allow-private-network: true
+  allow-origins:
+  - '*'
+geo-auto-update: true
+tcp-concurrent: true
+find-process-mode: always
+tun:
+  enable: false
+  device: Meta
+  stack: gvisor
+  dns-hijack:
+  - any:53
+  udp-timeout: 300
+  auto-route: true
+  strict-route: false
+  auto-redirect: false
+  auto-detect-interface: true
+  exclude-package: null
+dns:
+  enable: true
+  listen: :53
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter-mode: blacklist
+  prefer-h3: false
+  respect-rules: false
+  use-hosts: false
+  use-system-hosts: false
+  fake-ip-filter:
+  - '*.lan'
+  - '*.local'
+  - '*.arpa'
+  - time.*.com
+  - ntp.*.com
+  - time.*.com
+  - +.market.xiaomi.com
+  - localhost.ptlogin2.qq.com
+  - '*.msftncsi.com'
+  - www.msftconnecttest.com
+  default-nameserver:
+  - system
+  - 223.6.6.6
+  - 8.8.8.8
+  nameserver:
+  - 8.8.8.8
+  - https://doh.pub/dns-query
+  - https://dns.alidns.com/dns-query
+  fallback: []
+  nameserver-policy: {}
+  proxy-server-nameserver:
+  - https://doh.pub/dns-query
+  - https://dns.alidns.com/dns-query
+  - tls://223.5.5.5
+  direct-nameserver: []
+  direct-nameserver-follow-policy: false
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+    - 240.0.0.0/4
+    - 0.0.0.0/32
+    domain:
+    - +.google.com
+    - +.facebook.com
+    - +.youtube.com
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    HTTP:
+      ports:
+      - 80
+      - 8080-8880
+    TLS:
+      ports:
+      - 443
+      - 5228
+      - 8443
+    QUIC:
+      ports:
+      - 443
+      - 8443
+  force-domain:
+  - +.v2ex.com
+  skip-domain:
+  - Mijia Cloud
+geo-update-interval: 24
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+
+
+
+
+
+
+
+
+
 p:
   type: http
   interval: 3600
@@ -113,100 +219,7 @@ proxy_groups:
   - 1.主要地址
   - 2.备用地址
   - 4.落地机场
-external-controller-cors:
-  allow-private-network: true
-  allow-origins:
-  - '*'
-geo-auto-update: true
-tcp-concurrent: true
-find-process-mode: always
-external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
-tun:
-  enable: false
-  device: Meta
-  stack: gvisor
-  dns-hijack:
-  - any:53
-  udp-timeout: 300
-  auto-route: true
-  strict-route: false
-  auto-redirect: false
-  auto-detect-interface: true
-  exclude-package: null
-dns:
-  enable: true
-  listen: :53
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter-mode: blacklist
-  prefer-h3: false
-  respect-rules: false
-  use-hosts: false
-  use-system-hosts: false
-  fake-ip-filter:
-  - '*.lan'
-  - '*.local'
-  - '*.arpa'
-  - time.*.com
-  - ntp.*.com
-  - time.*.com
-  - +.market.xiaomi.com
-  - localhost.ptlogin2.qq.com
-  - '*.msftncsi.com'
-  - www.msftconnecttest.com
-  default-nameserver:
-  - system
-  - 223.6.6.6
-  - 8.8.8.8
-  nameserver:
-  - 8.8.8.8
-  - https://doh.pub/dns-query
-  - https://dns.alidns.com/dns-query
-  fallback: []
-  nameserver-policy: {}
-  proxy-server-nameserver:
-  - https://doh.pub/dns-query
-  - https://dns.alidns.com/dns-query
-  - tls://223.5.5.5
-  direct-nameserver: []
-  direct-nameserver-follow-policy: false
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-    ipcidr:
-    - 240.0.0.0/4
-    - 0.0.0.0/32
-    domain:
-    - +.google.com
-    - +.facebook.com
-    - +.youtube.com
-sniffer:
-  enable: true
-  force-dns-mapping: true
-  parse-pure-ip: true
-  override-destination: true
-  sniff:
-    HTTP:
-      ports:
-      - 80
-      - 8080-8880
-    TLS:
-      ports:
-      - 443
-      - 5228
-      - 8443
-    QUIC:
-      ports:
-      - 443
-      - 8443
-  force-domain:
-  - +.v2ex.com
-  skip-domain:
-  - Mijia Cloud
-geo-update-interval: 24
-profile:
-  store-selected: true
-  store-fake-ip: true
+
 proxies:
 - name: 🇨🇳 瓦洛兰大陆
   type: direct
