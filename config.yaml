@@ -32,7 +32,7 @@ proxy-providers:
   ## 这是我用来尝试激活推荐节点的特殊“提供者”
   NodeActivator: # 
     type: http
-    url: "https://sapi.dkhkz.cn/m/reg.aspx?k=aQTmOx4tXvG1WfB1WvOvXDgwbDEuWvGxXjsxXvKuWDGvWfBsW5EsW5X4N8S=&sign=576204320011013&ver=11&tg=dsv&sec=X5OyWfBwWvSsWDEtWDEvbDEtbQHvPc==&token=rTUdzwbL"
+    url: "https://sapi.dkhkz.cn/m/reg.aspx?k=aQTmOx4tXvG1XDOyXfGsWfcubDEuWvGxXjszY8KtWfW1WCxiLDBwV5EwXySpK8FeKew0XvOxKvW1XDBvWDA4N8S=&token=wIxSxsZq"
     interval: 900
     #  推荐节点出现高延时，请更新此订阅
     #  此订阅为空，它不提供实际的代理节点，其价值在于访问URL这个动作本身，仅为推荐节点的激活所用。
