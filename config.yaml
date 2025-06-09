@@ -18,7 +18,7 @@ proxy-providers:
 # --- 在这里添加其他订阅 ---
   p2:
     type: http
-    url: "https://sapi.dkhkz.cn/m/reg.aspx?k=aQTmOx4tXvG1WfBtY5gsXvWybDEuWvGxXjsxXvKuWDGvWfBsW5EsW5X4N8S=&sign=515550544281260&ver=11&tg=dsv&sec=X5ExX56sX5GwWfctWfKsbDEtbQHvPc==&token=AwvtRofK"
+    url: "https://gist.githubusercontent.com/byrisk/172280d15a99a420c2ec0d190be8e40a/raw/all.yaml"
     interval: 1900
     path: ./proxy_providers/p2.yaml
     health-check:
