@@ -3,7 +3,7 @@ proxy-providers:
   p1:
     type: http
     url: "https://gist.githubusercontent.com/byrisk/904fcf74c6299b728fb2b83d621832dd/raw/MQconfig.yaml" # 请替换成你的订阅链接
-    interval: 3600
+    interval: 900
     proxy: 🔰 模式选择
     path: ./proxy_providers/p1.yaml # 定义缓存路径
     health-check:
@@ -30,10 +30,10 @@ proxy-providers:
       udp: true
       
   ## 这是我用来尝试激活推荐节点的特殊“提供者”
-  NodeActivator: # 
-    type: http
-    url: "https://sapi.dkhkz.cn/m/reg.aspx?k=aQTmOx4tXvG1XDOyXfGsWfcubDEuWvGxXjszY8KtWfW1WCxiLDBwV5EwXySpK8FeKew0XvOxKvW1XDBvWDA4N8S=&token=wIxSxsZq"
-    interval: 900
+  # NodeActivator: # 
+  #   type: http
+  #   url: "https://sapi.dkhkz.cn/m/reg.aspx?k=aQTmOx4tXvG1XDOyXfGsWfcubDEuWvGxXjszY8KtWfW1WCxiLDBwV5EwXySpK8FeKew0XvOxKvW1XDBvWDA4N8S=&token=wIxSxsZq"
+  #   interval: 900
     #  推荐节点出现高延时，请更新此订阅
     #  此订阅为空，它不提供实际的代理节点，其价值在于访问URL这个动作本身，仅为推荐节点的激活所用。
     #  这是Clash会去访问的网址，您将这个URL设置为了您的节点的“激活链接”，如果推荐节点出现高延时不可用的情况下，请手动更新此订阅，或者复制此url到浏览器中打开。
